@@ -14,9 +14,17 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('email')->unique();
+            $table->string('username')->unique();
+            $table->string('email')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+
+            $table->string('user_type_code', 4); // "STD", "EDU", "ANL"
+            $table->foreignId('ref_user_type_id')
+                ->constrained('ref_master_types', 'id')
+                ->cascadeOnUpdate()
+                ->restrictOnDelete();
+
             $table->rememberToken();
             $table->timestamps();
         });

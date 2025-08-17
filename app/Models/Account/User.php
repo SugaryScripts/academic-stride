@@ -3,6 +3,7 @@
 namespace App\Models\Account;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Helper\HasProfilePhoto;
 use App\Models\Assessment\Exam;
 use App\Models\Assessment\Question;
 use App\Models\Attempt\SessionExam;
@@ -16,7 +17,8 @@ use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable, HasRoles;
+    use HasFactory, Notifiable,
+        HasRoles, HasProfilePhoto;
 
     /**
      * The attributes that are mass assignable.
@@ -64,6 +66,15 @@ class User extends Authenticatable {
             ->map(fn($word) => Str::substr($word, 0, 1))
             ->implode('');
     }
+
+    /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array<int, string>
+     */
+    protected $appends = [
+        'profile_photo_url',
+    ];
 
     /**
      * Get the master type that owns the user.

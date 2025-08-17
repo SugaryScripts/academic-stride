@@ -12,7 +12,7 @@ return new class extends Migration {
                 ->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreignId('user_id')->constrained('users')
                 ->cascadeOnUpdate()->cascadeOnDelete();
-            $table->datetime('started_at');
+            $table->datetime('started_at')->nullable();
             $table->datetime('finished_at')->nullable();
             $table->integer('total_score')->default(0);
             $table->integer('total_questions');

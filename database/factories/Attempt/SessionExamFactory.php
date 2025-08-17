@@ -19,8 +19,9 @@ class SessionExamFactory extends Factory {
         return [
             'exam_id' => Exam::factory(),
             'user_id' => User::factory(),
-            'started_at' => $startedAt,
-            'finished_at' => $this->faker->optional(0.8)->dateTimeBetween($startedAt, 'now'),
+            'started_at' => null,
+            //'finished_at' => $this->faker->optional(0.8)->dateTimeBetween($startedAt, 'now'),
+            'finished_at' => null,
             'total_score' => $correctAnswers * 5, // assuming 5 points per correct answer
             'total_questions' => $totalQuestions,
             'correct_answers' => $correctAnswers,

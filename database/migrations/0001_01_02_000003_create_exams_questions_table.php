@@ -30,13 +30,13 @@ return new class extends Migration {
             $table->id();
             $table->foreignId('exam_id')->constrained('exams')
                 ->cascadeOnUpdate()->cascadeOnDelete();
-            $table->foreignId('subject_id')->constrained('ref_subjects')
+            $table->foreignId('ref_subject_id')->constrained('ref_subjects')
                 ->cascadeOnUpdate()->cascadeOnDelete();
             $table->integer('question_count'); // e.g., 10 questions for science, 15 for math
             $table->text('notes')->nullable(); // additional notes about this subject in exam
             $table->timestamps();
 
-            $table->unique(['exam_id', 'subject_id'], 'exam_subject_unique');
+            $table->unique(['exam_id', 'ref_subject_id'], 'exam_subject_unique');
         });
 
         Schema::create('questions', function (Blueprint $table) {
@@ -56,11 +56,36 @@ return new class extends Migration {
                 ->cascadeOnUpdate()->nullOnDelete();
             $table->timestamps();
         });
+
+
+        // TODO: created by?
+        Schema::create('subject_proficiency_h', function (Blueprint $table) {
+            $table->id();
+            $table->integer('no');
+            $table->string('parameter');
+            $table->foreignId('ref_subject_id')->constrained('ref_subjects')
+                ->cascadeOnUpdate()->restrictOnDelete();
+            $table->timestamps();
+        });
+        Schema::create('subject_proficiency_d', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('question_id')
+                ->constrained('questions')
+                ->cascadeOnUpdate()
+                ->cascadeOnDelete();
+            $table->foreignId('subject_proficiency_h_id')
+                ->constrained('subject_proficiency_h')
+                ->cascadeOnUpdate()
+                ->cascadeOnDelete();
+            $table->timestamps();
+        });
     }
 
     public function down(): void {
         Schema::dropIfExists('exams');
         Schema::dropIfExists('questions');
         Schema::dropIfExists('exam_subject_configurations');
+        Schema::dropIfExists('subject_proficiency_h');
+        Schema::dropIfExists('subject_proficiency_d');
     }
 };

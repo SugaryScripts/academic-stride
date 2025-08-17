@@ -10,7 +10,9 @@ use Illuminate\Database\Eloquent\Model;
 class SessionExam extends Model {
     use HasFactory;
 
+    // $sessionStatuses = ['IN_PROGRESS', 'COMPLETED', 'CLOSED', 'OPEN'];
     protected $fillable = [
+        'id',
         'exam_id',
         'user_id',
         'started_at',

@@ -54,4 +54,11 @@ class Question extends Model {
     public function sessionQuestions() {
         return $this->hasMany(SessionQuestion::class);
     }
+
+    /**
+     * Get the proficiency detail for this question.
+     */
+    public function proficiencyDetail() {
+        return $this->hasOne(\App\Models\MasterType\SubjectProficiencyD::class, 'question_id');
+    }
 }

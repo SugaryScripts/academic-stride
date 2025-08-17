@@ -2,13 +2,9 @@
 
 namespace Database\Seeders;
 
-use App\Models\Account\User;
-use App\Models\Assessment\AnswerTextOption;
-use App\Models\Assessment\Exam;
-use App\Models\Assessment\ExamSubjectConfiguration;
-use App\Models\Assessment\Question;
-use App\Models\MasterType\RefEducation;
-use App\Models\MasterType\RefSubject;
+use Database\Seeders\QuestionBank\BiSeeder;
+use Database\Seeders\QuestionBank\IpsGeografiSeeder;
+use Database\Seeders\QuestionBank\IpsSosiologiSeeder;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -23,13 +19,23 @@ class DatabaseSeeder extends Seeder
         $this->call([
             RefMasterTypeSeeder::class,
             RefEducationSeeder::class,
-            RefSubjectSeeder::class,
+            //RefSubjectSeeder::class,
+            RealRefSubjectSeeder::class,
 
             PermissionSeeder::class,
             UserSeeder::class,
 
-            QuestionSeeder::class,
-            ExamSeeder::class,
+            //QuestionSeeder::class,
+
+            BiSeeder::class,
+            IpsSosiologiSeeder::class,
+
+            IpsGeografiSeeder::class,
+
+            //ExamSeeder::class,
+            //NotRealQuestionSeeder::class,
+
+            RealExamSeeder::class,
         ]);
     }
 }

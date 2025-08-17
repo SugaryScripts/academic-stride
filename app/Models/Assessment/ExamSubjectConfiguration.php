@@ -5,12 +5,13 @@ namespace App\Models\Assessment;
 use App\Models\MasterType\RefSubject;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class ExamSubjectConfiguration extends Model {
     use HasFactory;
 
     protected $fillable = [
-        'exam_id', 'subject_id',
+        'exam_id', 'ref_subject_id',
         'question_count',
         'notes'
     ];
@@ -18,14 +19,14 @@ class ExamSubjectConfiguration extends Model {
     /**
      * Get the exam that owns the configuration.
      */
-    public function exam() {
+    public function exam(): BelongsTo {
         return $this->belongsTo(Exam::class);
     }
 
     /**
      * Get the subject that owns the configuration.
      */
-    public function subject() {
-        return $this->belongsTo(RefSubject::class, 'subject_id');
+    public function subject(): BelongsTo {
+        return $this->belongsTo(RefSubject::class, 'ref_subject_id');
     }
 }

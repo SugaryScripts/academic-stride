@@ -6,10 +6,11 @@ namespace App\Constants;
 
 final class UserTypeConstant {
     // User Type Codes
-    public const STUDENT = 'STD';
-    public const EDUCATOR = 'EDU';
-    public const ANALYSER = 'ANL';
     public const ADMIN = 'ADM';
+    public const ANALYSER = 'ANL';
+    public const INSTITUTION = 'INS';
+    public const EDUCATOR = 'EDU';
+    public const STUDENT = 'STD';
 
     // Other related user type constants if needed
     // public const DEFAULT_ROLE = 'student';

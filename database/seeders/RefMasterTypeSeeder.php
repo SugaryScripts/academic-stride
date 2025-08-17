@@ -50,6 +50,12 @@ class RefMasterTypeSeeder extends Seeder {
                 'type' => UserTypeConstant::REF_MASTER_USER_TYPE
             ],
             [
+                'name' => 'Institution',
+                'description' => 'Users who create, manage, and grade exams, and instruct students.',
+                'code' => UserTypeConstant::INSTITUTION,
+                'type' => UserTypeConstant::REF_MASTER_USER_TYPE
+            ],
+            [
                 'name' => 'Analyser',
                 'description' => 'Users who access and analyze performance data and reports.',
                 'code' => UserTypeConstant::ANALYSER,

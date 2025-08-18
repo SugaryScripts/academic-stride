@@ -66,3 +66,5 @@ Route::middleware('auth')->group(function () {
 //Route::get('/', fn() => view('livewire.auth.login'))->name('login');
 
 require __DIR__.'/auth.php';
+
+require __DIR__ . '/dummy-fe.php';

@@ -34,14 +34,14 @@ class RealExamSeeder extends Seeder {
         $requiredQuestionCounts = [
             //'MATH' => 5,
             'IND' => 20,
-            /*'ENG' => 5,
-            'IPA-FISIKA' => 3,
-            'IPA-KIMIA' => 3,*/
+            /*'ENG' => 5,*/
+            'IPA-FISIKA' => 5,
+           // 'IPA-KIMIA' => 5,
             'IPS-SOSIOG' => 20,
             'IPS-GEOGGI' => 15,
-            /*'IPS-EKONMI' => 2,
-            'IPS-SEJARH' => 2,
-            'IPS-ANTRGI' => 2,*/
+            'IPS-EKONMI' => 5,
+            'IPS-SEJARH' => 5,
+            'IPS-ANTRGI' => 5,
         ];
 
         // Get reference data

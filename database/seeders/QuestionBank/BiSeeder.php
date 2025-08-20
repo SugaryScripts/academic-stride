@@ -109,6 +109,34 @@ Pernyataan di atas mengandung bias informasi karena …",
             [
                 "Bagian dari teks sastra yang menunjukkan puncak masalah atau konflik disebut …",
                 "7"
+            ],
+            [
+                "Struktur teks drama yang termasuk dalam sastra kompleks biasanya terdiri atas …",
+                "7"
+            ],
+            [
+                "Dalam teks drama kompleks, aspek nonverbal yang penting untuk diperhatikan oleh pemeran adalah …",
+                "8"
+            ],
+            [
+                "Bahasa tubuh yang tepat saat menyampaikan teks secara santun dan menghormati lawan bicara adalah …",
+                "8"
+            ],
+            [
+                "Gestur tangan dalam komunikasi nonverbal berfungsi untuk …",
+                "8"
+            ],
+            [
+                "Contoh media elektronik yang biasa digunakan untuk menyajikan teks visual adalah …",
+                "9"
+            ],
+            [
+                "Manakah unsur yang termasuk dalam struktur teks multimodal?",
+                "9"
+            ],
+            [
+                "Penanda kohesi yang umum digunakan dalam teks lisan adalah …",
+                "9"
             ]
         ];
 
@@ -252,6 +280,55 @@ Pernyataan di atas mengandung bias informasi karena …",
                 "Orientasi",
                 "Komplikasi",
                 "Evaluasi"
+            ],
+            [
+                "Pendahuluan, isi, dan penutup",
+                "Orientasi, komplikasi, dan resolusi",
+                "Latar, tokoh, dan amanat",
+                "Prolog, dialog, dan epilog",
+                "Masalah, solusi, dan kesimpulan"
+            ],
+            [
+                "Penggunaan kata keterangan",
+                "Intonasi suara dan ekspresi wajah",
+                "Tata bahasa dan tanda baca",
+                "Pemilihan kosakata baku",
+                "Isi dialog panjang"
+            ],
+            [
+                "Menghindari kontak mata sama sekali",
+                "Menatap tajam tanpa berkedip",
+                "Kontak mata yang natural dan sikap terbuka",
+                "Menyilangkan tangan di depan dada",
+                "Melihat ke bawah sepanjang waktu"
+            ],
+            [
+                "Menggantikan isi pesan secara penuh",
+                "Menambah kejelasan dan penekanan pada pesan verbal",
+                "Mengalihkan perhatian pendengar",
+                "Membingungkan audiens",
+                "Mengurangi waktu bicara"
+            ],
+            [
+                "Buku cetak",
+                "Televisi",
+                "Poster dinding",
+                "Surat kabar",
+                "Majalah cetak"
+            ],
+            [
+                "Kata ganti, konjungsi, dan kata keterangan",
+                "Gambar, teks, dan suara",
+                "Judul, isi, dan kesimpulan",
+                "Kalimat utama, kalimat penjelas, dan kalimat penguat",
+                "Pendahuluan, isi, dan penutup"
+            ],
+            [
+                "Kata penghubung seperti \"kemudian\", \"selanjutnya\", dan \"lalu\"",
+                "Tanda baca seperti titik dan koma",
+                "Ilustrasi gambar dan grafik",
+                "Huruf kapital dan cetak tebal",
+                "Diagram dan tabel"
             ]
         ];
 
@@ -319,6 +396,13 @@ Pernyataan di atas mengandung bias informasi karena …",
             [
                 0, 0, 0, 1, 0 // D
             ],
+            [0, 0, 0, 1, 0], // Question 21 - D is correct [source_2]
+            [0, 1, 0, 0, 0], // Question 22 - B is correct [source_2]
+            [0, 0, 1, 0, 0], // Question 23 - C is correct [source_2]
+            [0, 1, 0, 0, 0], // Question 24 - B is correct [source_2]
+            [0, 1, 0, 0, 0], // Question 25 - B is correct [source_2]
+            [0, 1, 0, 0, 0], // Question 26 - B is correct [source_2]
+            [1, 0, 0, 0, 0]  // Question 27 - A is correct [source_2]
         ];
 
         $bi_proficiencies = [

@@ -6,19 +6,17 @@ import { createRoot } from 'react-dom/client'
 import { StrictMode } from 'react';
 
 createInertiaApp({
-  resolve: name => {
-    const pages = import.meta.glob(
-      './pages/**/*.jsx',
-    { eager: true })
-    return pages[`./pages/${name}.jsx`]
+ resolve: name => {
+    const pages = import.meta.glob('./pages/**/*.jsx', { eager: true });
+    return pages[`./pages/${name}.jsx`];
   },
   setup({ el, App, props }) {
-
     createRoot(el).render(
       <StrictMode>
         <App {...props} />
       </StrictMode>
-    )
+    );
   },
 });
+
 

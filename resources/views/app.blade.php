@@ -11,6 +11,6 @@
 </head>
 <body class="overflow-x-hidden">
     @routes
-    @inertia
+    @inertia  <!-- Ini harus ada untuk render komponen React -->
 </body>
 </html>

@@ -15,6 +15,9 @@ export default defineConfig({
         tailwindcss(),
 
     ],
+    build: {
+    minify: false,  // Nonaktifkan minifikasi untuk debug
+    },
     server: {
         host: '127.0.0.1',
         cors: true,

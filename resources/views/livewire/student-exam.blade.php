@@ -1,4 +1,5 @@
 
+
 <div>
     <section id="exam">
         <div class="container">
@@ -6,6 +7,7 @@
             <div class="row justify-content-center text-center mb-4">
                 <div class="col-md-10 col-xl-8">
                     <h2 class="mb-3">UI/UX Design Knowledge Exam</h2>
+                    <span class="math text-gray-100">$$ E = mc^2 $$</span>
                     <p class="mb-0 text-muted">Test your understanding of user interface and user experience design principles.</p>
                 </div>
             </div>
@@ -40,8 +42,8 @@
                                 <!-- Question Text -->
                                 <div class="mb-4 mb-md-5">
                                     <h4 class="fw-bold text-dark lh-base mb-4">
-                                        <span class="badge bg-light text-dark me-3 fs-6">{{ $currentQuestion }}</span>
-                                        {!! $question->question_text !!}
+                                        <span class="badge bg-light text-dark me-3 fs-6 math">{{ $currentQuestion }}</span>
+                                         {!! $question->question_text !!}
                                     </h4>
                                 </div>
 

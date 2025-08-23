@@ -30,7 +30,7 @@ class MatematikaSeeder extends Seeder
                 "1"
             ],
             [
-                "Nilai dari $\sqrt{4 + \sqrt{7}} - \sqrt{4 - \sqrt{7}}$ =",
+                "Nilai dari $\sqrt{4 + \sqrt{7}} - \sqrt{4 - \sqrt{7}} =$",
                 "1"
             ],
             [
@@ -38,7 +38,7 @@ class MatematikaSeeder extends Seeder
                 "1"
             ],
             [
-                'Proyeksi titik $(3,4)$ pada garis $y=x$ adalah ...',
+                'Proyeksi titik (3,4) pada garis y=x adalah ...',
                 "2"
             ],
             [

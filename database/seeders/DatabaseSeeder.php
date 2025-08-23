@@ -33,9 +33,9 @@ class DatabaseSeeder extends Seeder
             BiSeeder::class,
             IpsSosiologiSeeder::class,
             IpsGeografiSeeder::class,
-            MatematikaSeeder::class,
-            IpaFisikaSeeder::class,
-            IpaKimiaSeeder::class,
+            // MatematikaSeeder::class,
+            // IpaFisikaSeeder::class,
+            // IpaKimiaSeeder::class,
 
 
             //ExamSeeder::class,

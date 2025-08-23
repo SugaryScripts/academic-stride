@@ -26,19 +26,19 @@ class IpsSosiologiSeeder extends Seeder
 
         $questions = [
             [
-                "Salah satu masalah sosial dalam masyarakat adalah kemiskinan. Tingginya angka kemiskinan dapat meningkatkan tindak kriminal dalam masyarakat. Untuk mengatasi permasalahan tersebut, fungsi sosiologi adalah memberikan sumbangan dalam bentuk...",
+                "Jika $4^m = 25$, maka $2^{m+3} + 4^m$ =",
                 "1"
             ],
             [
-                "Seorang walikota ingin melakukan perbaikan pada sistem tata kota di wilayahnya. Hal tersebut dilakukan agar tata kota terlihat lebih indah dan nyaman. Untuk itu, sosiolog membantunya memberikan data yang akurat tentang kebutuhan masyarakat pada keindahan kota. Manfaat sosiologi dalam kasus tersebut adalah untuk...",
+                "Nilai dari $\sqrt{4 + \sqrt{7}} - \sqrt{4 - \sqrt{7}}$ =",
                 "1"
             ],
             [
-                "Aspek utama yang dipelajari oleh sosiologi adalah interaksi antara...",
+                '  {{ \\frac{a}{b} = c }}',
                 "1"
             ],
             [
-                "Bentuk keluarga berdasarkan perkawinan tunggal yang terdiri dari suami, istri, dan anak disebut dengan keluarga...",
+                'Proyeksi titik $(3,4)$ pada garis $y=x$ adalah ...',
                 "2"
             ],
             [
@@ -90,64 +90,70 @@ A. Ilmu pengetahuan dan teknologi",
 
         $answers = [
             [
-                "Perencanaan",
-                "Jasa konsultan",
-                "Ketersediaan data",
-                "Tenaga kerja terampil"
+                '35',
+                '75',
+                '65',
+                '55',
             ],
             [
-                "Penelitian",
-                "Pencegahan",
-                "Pengawasan",
-                "Penyelesaian"
+                '$\sqrt{2}$',
+                '$\sqrt{4}$',
+                '$\sqrt{3}$',
+                '1',
             ],
             [
-                "Manusia dengan lingkungan",
-                "Rakyat dengan penguasa",
-                "Manusia dengan manusia atau kelompok",
-                "Kelas-kelas sosial di masyarakat"
+                '$\frac{4}{3}$',
+                '$\frac{1}{2}$',
+                '2',
+                '$\frac{4}{5}$',
             ],
             [
-                "Inti",
-                "Besar",
-                "Sedang",
-                "Kecil"
+                '$\left(\frac{4}{3},\frac{4}{3}\right)$',
+                '$\left(\frac{9}{4},\frac{9}{4}\right)$',
+                '$\left(\frac{7}{3},\frac{7}{3}\right)$',
+                '$\left(\frac{7}{2},\frac{7}{2}\right)$',
             ],
             [
-                "Agama",
-                "Pribadi",
-                "Politik",
-                "Rasial"
+                '$2x+4y \leq 10$, $x+2y \leq 10$, $x \geq 0$, dan $y \geq 0$',
+                '$4x+y \leq 20$, $2x+2y \leq 20$, $x \geq 0$, dan $y \geq 0$',
+                '$4x+3y \leq 20$, $2x+5y \leq 20$, $x \geq 0$, dan $y \geq 0$',
+                '$x+3y \leq 20$, $x+5y \leq 20$, $x \geq 0$, dan $y \geq 0$',
             ],
             [
-                "Imitasi",
-                "Sugesti",
-                "Identifikasi",
-                "Simpati"
+                '25%',
+                '28%',
+                '31%',
+                '37%',
             ],
             [
-                "Afektif",
-                "Rasionalitas berorientasi nilai",
-                "Tradisional",
-                "Rasionalitas parlemen"
+                '$\frac{125}{\sqrt{3}+1}$',
+                '$\frac{125}{\sqrt{3}-6}$',
+                '$\frac{125}{\sqrt{2}+6}$',
+                '$\frac{125}{\sqrt{3}-1}$',
             ],
             [
-                "Kesadaran diri sebagai makhluk sosial",
-                "Tuntutan kebutuhan",
-                "Semangat gotong royong",
-                "Perasaan menyatu"
+                '$\sqrt{10(\sqrt{17}+3)}$ mil',
+                '$\sqrt{10(\sqrt{15}-3)}$ mil',
+                '$\sqrt{10(\sqrt{16}+2)}$ mil',
+                '$\sqrt{1900}$ mil',
             ],
             [
-                "Ketertiban",
-                "Keteraturan",
-                "Sosialisasi",
-                "Keajegan"
+                '$-\frac{1}{5}$',
+                '$\frac{4}{5}$',
+                '$-\frac{5}{3}$',
+                '-1',
             ],
             [
-                "Peningkatan kualitas sumber daya manusia",
-                "Kemajuan zaman",
-                "Kemampuan manusia mengikuti perkembangan",
-                "Adanya kerjasama antar individu"
+                '$\begin{pmatrix} -2 & -3 \\ -3 & 2 \end{pmatrix}$',
+                '$\begin{pmatrix} -2 & 3 \\ 3 & -2 \end{pmatrix}$',
+                '$\begin{pmatrix} -4 & -3 \\ -3 & 4 \end{pmatrix}$',
+                '$\begin{pmatrix} 2 & -3 \\ 3 & -2 \end{pmatrix}$',
+            ],
+            [
+                '$\frac{2}{5}$ atau $3$',
+                '$1$ atau $\frac{1}{2}$',
+                '$2$ atau $\frac{4}{5}$',
+                '$1$ atau $-\frac{2}{3}$',
             ],
             [
                 "Ilmu pengetahuan dan teknologi",

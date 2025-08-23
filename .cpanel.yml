@@ -1,0 +1,9 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=~/public_html/garudacerdas.id
+    - /usr/local/bin/php composer.phar install
+    - /usr/local/bin/php artisan optimize
+#    - /bin/rm -rf $DEPLOYPATH
+#    - /bin/mkdir -p $DEPLOYPATH
+#    - /bin/cp -a . $DEPLOYPATH

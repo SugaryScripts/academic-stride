@@ -1,3 +1,4 @@
+
 <div>
     <section id="exam">
         <div class="container">
@@ -40,7 +41,7 @@
                                 <div class="mb-4 mb-md-5">
                                     <h4 class="fw-bold text-dark lh-base mb-4">
                                         <span class="badge bg-light text-dark me-3 fs-6">{{ $currentQuestion }}</span>
-                                        {{ $question->question_text }}
+                                        {!! $question->question_text !!}
                                     </h4>
                                 </div>
 
@@ -241,7 +242,7 @@
                                 }
                             @endphp
                             <div class="col-2 col-sm-1">
-                                <button wire:click="goToQuestion({{ $i }})" 
+                                <button wire:click="goToQuestion({{ $i }})"
                                         class="{{ $buttonClass }} w-100"
                                         data-bs-dismiss="modal"
                                         wire:navigate>
@@ -337,7 +338,7 @@
 
                 // Prevent accidental page refresh
                 let examSubmitted = false;
-                
+
                 window.addEventListener('beforeunload', function (e) {
                     if (!examSubmitted) {
                         e.preventDefault();
@@ -351,13 +352,13 @@
                     examSubmitted = true;
                     clearInterval(timerInterval);
                 });
-                
+
                 // Listen for Livewire event
                 Livewire.on('examSubmitted', function() {
                     examSubmitted = true;
                     clearInterval(timerInterval);
                 });
-                
+
                 // Auto-scroll current question into view
                 function scrollToCurrentQuestion() {
                     const currentBtn = document.querySelector('.btn-primary[wire\\:click*="goToQuestion"]');
@@ -365,7 +366,7 @@
                         currentBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
                     }
                 }
-                
+
                 // Scroll on page load and after updates
                 setTimeout(scrollToCurrentQuestion, 100);
                 document.addEventListener('livewire:navigated', scrollToCurrentQuestion);
@@ -374,3 +375,4 @@
         </script>
     @endpush
 </div>
+

@@ -3,8 +3,11 @@
 namespace Database\Seeders;
 
 use Database\Seeders\QuestionBank\BiSeeder;
+use Database\Seeders\QuestionBank\IpaFisikaSeeder;
+use Database\Seeders\QuestionBank\IpaKimiaSeeder;
 use Database\Seeders\QuestionBank\IpsGeografiSeeder;
 use Database\Seeders\QuestionBank\IpsSosiologiSeeder;
+use Database\Seeders\QuestionBank\MatematikaSeeder;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -29,8 +32,11 @@ class DatabaseSeeder extends Seeder
 
             BiSeeder::class,
             IpsSosiologiSeeder::class,
-
             IpsGeografiSeeder::class,
+            //MatematikaSeeder::class,
+            IpaFisikaSeeder::class,
+            //IpaKimiaSeeder::class,
+
 
             //ExamSeeder::class,
             //NotRealQuestionSeeder::class,

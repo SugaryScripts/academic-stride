@@ -82,6 +82,54 @@ class IpsGeografiSeeder extends Seeder {
             [
                 "Keanekaragaman hayati tingkat gen ditunjukkan oleh perbedaan...",
                 "5"
+            ],
+            [
+                "Indonesia memiliki jumlah penduduk yang besar. Hal ini dapat menimbulkan dampak positif yaitu...",
+                "6"
+            ],
+            [
+                "Berikut ini yang termasuk faktor penyebab tingginya angka kelahiran di Indonesia adalah...",
+                "6"
+            ],
+            [
+                "Dampak negatif dari persebaran penduduk yang tidak merata adalah...",
+                "6"
+            ],
+            [
+                "Mitigasi bencana adalah...",
+                "7"
+            ],
+            [
+                "Contoh bentuk mitigasi bencana gempa bumi adalah...",
+                "7"
+            ],
+            [
+                "Tujuan utama dari mitigasi bencana adalah...",
+                "7"
+            ],
+            [
+                "Tujuan utama pelestarian lingkungan hidup adalah...",
+                "8"
+            ],
+            [
+                "Contoh tindakan manusia yang merusak lingkungan adalah...",
+                "8"
+            ],
+            [
+                "Prinsip 3R dalam pengelolaan sampah terdiri dari...",
+                "8"
+            ],
+            [
+                "Wilayah adalah...",
+                "9"
+            ],
+            [
+                "Pembangunan wilayah bertujuan untuk...",
+                "9"
+            ],
+            [
+                "Wilayah yang menjadi pusat pertumbuhan biasanya memiliki...",
+                "9"
             ]
         ];
 
@@ -175,6 +223,78 @@ class IpsGeografiSeeder extends Seeder {
                 "Warna kulit antar manusia",
                 "Spesies hewan yang berbeda",
                 "Iklim di berbagai benua"
+            ],
+            [
+                "Tingginya angka pengangguran",
+                "Beban pembangunan meningkat",
+                "Tersedianya tenaga kerja yang melimpah",
+                "Terjadinya degradasi lingkungan"
+            ],
+            [
+                "Urbanisasi tinggi",
+                "Tingkat pendidikan rendah",
+                "Program keluarga berencana berhasil",
+                "Pendapatan masyarakat tinggi"
+            ],
+            [
+                "Terbentuknya pusat pertumbuhan baru",
+                "Ketersediaan lahan semakin banyak",
+                "Ketimpangan pembangunan antarwilayah",
+                "Peningkatan ekspor barang"
+            ],
+            [
+                "Proses mempercepat penyebaran bencana",
+                "Upaya memperparah dampak bencana",
+                "Upaya mengurangi risiko dan dampak dari bencana",
+                "Proses evakuasi setelah bencana"
+            ],
+            [
+                "Menanam pohon di bantaran sungai",
+                "Membangun rumah tahan gempa",
+                "Menyediakan alat pemadam kebakaran",
+                "Membuat sistem irigasi"
+            ],
+            [
+                "Menambah jumlah pengungsi",
+                "Memperluas dampak bencana",
+                "Mengurangi risiko korban jiwa dan kerugian harta benda",
+                "Menghentikan proses alam"
+            ],
+            [
+                "Memperluas kawasan industri",
+                "Meningkatkan eksploitasi sumber daya",
+                "Menjaga keseimbangan ekosistem dan kelestarian alam",
+                "Menurunkan harga tanah"
+            ],
+            [
+                "Menanam pohon di lahan kritis",
+                "Menggunakan energi terbarukan",
+                "Membuang limbah pabrik ke sungai",
+                "Membuat taman kota"
+            ],
+            [
+                "Reduce, Reuse, Recycle",
+                "Reuse, Recycle, Remove",
+                "Reduce, Reuse, Relocate",
+                "Record, Reduce, Reuse"
+            ],
+            [
+                "Tempat berinteraksi antarnegara",
+                "Bagian permukaan bumi yang memiliki karakteristik tertentu dan dibatasi secara administratif atau alami",
+                "Daerah yang tidak memiliki penduduk",
+                "Tempat yang hanya digunakan untuk kegiatan pertanian"
+            ],
+            [
+                "Meningkatkan utang negara",
+                "Menambah jumlah penduduk",
+                "Meningkatkan kesejahteraan masyarakat dan pemerataan hasil pembangunan",
+                "Menghapus wilayah pedesaan"
+            ],
+            [
+                "Akses terbatas ke transportasi",
+                "Tingkat pendidikan rendah",
+                "Potensi ekonomi tinggi dan infrastruktur lengkap",
+                "Kegiatan ekonomi yang tertutup"
             ]
         ];
 
@@ -224,6 +344,18 @@ class IpsGeografiSeeder extends Seeder {
             [
                 0, 1, 0, 0 // B
             ],
+            [0,0,1,0], // C
+            [0,1,0,0], // B
+            [0,0,1,0], // C
+            [0,0,1,0], // C
+            [0,1,0,0], // B
+            [0,0,1,0], // C
+            [0,0,1,0], // C
+            [0,0,1,0], // C
+            [1,0,0,0], // A
+            [0,1,0,0], // B
+            [0,0,1,0], // C
+            [0,0,1,0]  // C
         ];
 
         $proficiencies = [

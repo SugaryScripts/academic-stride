@@ -251,9 +251,9 @@ class IpaKimiaSeeder extends Seeder
             [
                 "5", "penerapan matriks untuk merepresentasi dan menyederhanakan data"
             ],
-            [
+            /*[
                 "6", "pemodelan situasi dalam bentuk matematis dengan menggunakan fungsi dan sifat-sifatnya"
-            ],
+            ],*/
         ];
          // proficiencies
         $this->command->info("Creating $SUBJ proficiencies...");

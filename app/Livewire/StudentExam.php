@@ -51,7 +51,7 @@ class StudentExam extends Component {
 
         // 2. Ensure estimated_finished_at is initialized correctly based on (now guaranteed) started_at.
         if (is_null($this->examSession->estimated_finished_at)) {
-            $this->examSession->estimated_finished_at = $this->examSession->started_at->copy()->addMinutes($this->examSession->exam->duration_minutes);
+            $this->examSession->estimated_finished_at = $this->examSession->started_at->copy()->addMinutes((int) $this->examSession->exam->duration_minutes);
             // After this line, $this->examSession->estimated_finished_at is a Carbon instance.
         }
 

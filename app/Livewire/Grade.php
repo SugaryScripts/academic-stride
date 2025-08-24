@@ -67,7 +67,7 @@ class Grade extends Component {
     public function selectItem($hashed): void {
         $this->dispatch('getData', $hashed);
         $this->dispatch('showUserModal');
-        $this->redirectRoute('grade.detail', ['id' => $hashed]);
+        $this->redirectRoute('my-grades', ['id' => $hashed]);
     }
 
     #[On('delete')]

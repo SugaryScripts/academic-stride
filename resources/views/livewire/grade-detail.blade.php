@@ -184,7 +184,68 @@
 
     @push('scripts')
         <script src="{{ asset('assets/js/plugins/apexcharts.min.js') }}"></script>
+
+        <!-- Floating Scroll-to-Top Button -->
+        <div class="floting-button">
+            <a href="javascript:void(0);" id="scroll-to-top-btn" class="btn btn-primary d-inline-flex align-items-center gap-2" data-bs-toggle="tooltip" title="Scroll to Top" style="display: none;">
+                <i class="ph-duotone ph-arrow-up"></i>
+                <span>Back to Top</span>
+            </a>
+        </div>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const scrollToTopBtn = document.getElementById('scroll-to-top-btn');
+                const examSessionsTable = document.querySelector('.table-responsive');
+
+                console.log('Scroll to Top Button (element):', scrollToTopBtn);
+                console.log('Exam Sessions Table Element (element):', examSessionsTable);
+
+                let tableOffsetTop = 500; // Default threshold
+
+                if (examSessionsTable) {
+                    tableOffsetTop = examSessionsTable.getBoundingClientRect().top + window.pageYOffset;
+                    console.log('Calculated tableOffsetTop:', tableOffsetTop);
+                } else {
+                    console.log('Exam Sessions Table element not found. Using default tableOffsetTop:', tableOffsetTop);
+                }
+
+                scrollToTopBtn.addEventListener('click', function() {
+                    console.log('Scroll to Top button clicked!');
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                });
+
+                // Initial check in case the page loads scrolled down
+                if (scrollToTopBtn) { // Add safety check for button existence
+                    if (window.scrollY > tableOffsetTop) {
+                        scrollToTopBtn.style.setProperty('display', 'flex', 'important');
+                        console.log('Button display set to flex !important (initial check)');
+                    } else {
+                        scrollToTopBtn.style.setProperty('display', 'none', 'important');
+                        console.log('Button display set to none !important (initial check)');
+                    }
+                } else {
+                    console.log('Scroll to Top Button not found on DOMContentLoaded');
+                }
+
+
+                window.onscroll = function() {
+                    if (scrollToTopBtn) { // Add safety check for button existence
+                        if (window.scrollY > tableOffsetTop) {
+                            scrollToTopBtn.style.setProperty('display', 'flex', 'important');
+                        } else {
+                            scrollToTopBtn.style.setProperty('display', 'none', 'important');
+                        }
+                    }
+                };
+            });
+
+        </script>
     @endpush
+
 
     {{--@livewire(\App\Livewire\Employee\UserModal::class)--}}
 </div>

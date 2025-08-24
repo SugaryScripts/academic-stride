@@ -54,6 +54,11 @@ class RealRefSubjectSeeder extends Seeder {
                             'name' => 'Kimia',
                             'code' => 'IPA-KIMIA',
                             'description' => 'blablabla',
+                        ],
+                        [
+                            'name' => 'Biologi',
+                            'code' => 'IPA-BIOLGI',
+                            'description' => 'blablabla',
                         ]
                     ]
                 ],

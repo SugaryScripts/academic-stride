@@ -16,8 +16,8 @@ new #[Layout('layouts.auth', [
     'page_title' => 'Register new account'
 ])] class extends Component {
     // TODO: Real size NISN
-    #[Validate('required|string|digits:10')]
-    public string $nisn;
+    #[Validate('required|string|digits:10|unique:users,username')]
+        public string $nisn;
     #[Validate('required|string|max:255')]
     public string $name;
 

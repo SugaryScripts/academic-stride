@@ -13,6 +13,7 @@ return new class extends Migration {
             $table->foreignId('user_id')->constrained('users')
                 ->cascadeOnUpdate()->cascadeOnDelete();
             $table->datetime('started_at')->nullable();
+            $table->timestamp('estimated_finished_at')->nullable();
             $table->datetime('finished_at')->nullable();
             $table->integer('total_score')->default(0);
             $table->integer('total_questions');
@@ -29,6 +30,7 @@ return new class extends Migration {
             $table->foreignId('question_id')->constrained('questions')
                 ->cascadeOnUpdate()->cascadeOnDelete();
             $table->integer('question_order'); // order of question in exam
+            $table->json('answer_options_shuffled')->nullable();
             $table->timestamps();
 
             $table->unique(['session_exam_id', 'question_id'], 'session_question_unique');

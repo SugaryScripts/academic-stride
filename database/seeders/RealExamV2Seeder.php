@@ -125,6 +125,7 @@ class   RealExamV2Seeder extends Seeder {
                     'created_by' => $educators->random()->id,
                     'ref_education_id' => $education->id,
                     'ref_education_code' => $education->code,
+                    'duration_minutes' => 1,
                     'total_questions' => $totalParentQuestions,
                     'is_active' => true,
                 ]);
@@ -261,10 +262,14 @@ class   RealExamV2Seeder extends Seeder {
 
                 // Attach questions to the ExamSession
                 foreach ($questionsToAttach as $questionIndex => $question) {
+                    // Get answer options, shuffle their IDs, and store
+                    $answerTextOptionIds = $question->answerTextOptions->pluck('id')->shuffle()->toArray();
+
                     $sessionQuestion = SessionQuestion::create([
                         'session_exam_id' => $session->id,
                         'question_id' => $question->id,
                         'question_order' => $questionIndex + 1,
+                        'answer_options_shuffled' => $answerTextOptionIds,
                     ]);
 
                     // Create user answers only for COMPLETED sessions

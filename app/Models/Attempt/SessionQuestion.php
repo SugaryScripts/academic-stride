@@ -12,7 +12,12 @@ class SessionQuestion extends Model {
     protected $fillable = [
         'session_exam_id',
         'question_id',
-        'question_order'
+        'question_order',
+        'answer_options_shuffled'
+    ];
+
+    protected $casts = [
+        'answer_options_shuffled' => 'array',
     ];
 
     /**

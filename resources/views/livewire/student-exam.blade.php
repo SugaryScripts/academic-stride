@@ -1,14 +1,28 @@
 
 
-<div>
+<div
+    x-data="{
+        questionUpdatedKey: @entangle('questionUpdatedKey').live,
+    }"
+    x-init="
+        MathJax.typesetPromise(); // Initial render
+
+        $watch('questionUpdatedKey', () => {
+             // Re-render MathJax when questionUpdatedKey changes
+            setTimeout(() => {
+                MathJax.typesetPromise();
+            }, 0);
+        });
+    "
+>
     <section id="exam">
         <div class="container">
             <!-- Exam Header -->
             <div class="row justify-content-center text-center mb-4">
                 <div class="col-md-10 col-xl-8">
-                    <h2 class="mb-3">UI/UX Design Knowledge Exam</h2>
-                    <span class="math text-gray-100">$$ E = mc^2 $$</span>
-                    <p class="mb-0 text-muted">Test your understanding of user interface and user experience design principles.</p>
+                    <h2 class="mb-3">{{ $examSession->exam->title }}</h2>
+                    {{--<span class="math text-gray-100">$$ E = mc^2 $$</span>--}}
+                    {{--<p class="mb-0 text-muted">Test your understanding of user interface and user experience design principles.</p>--}}
                 </div>
             </div>
 
@@ -52,9 +66,9 @@
                                     <div class="row">
                                         @foreach($question->answerTextOptions as $index => $answer)
                                             <div class="col-12 mb-3">
-                                                <div class="form-check">
+                                                <div class="form-check d-flex align-items-center">
                                                     <input type="radio"
-                                                           class="form-check-input"
+                                                           class="form-check-input mt-0"
                                                            name="selected_answer"
                                                            id="answer{{ $answer->id }}"
                                                            value="{{ $answer->id }}"
@@ -62,11 +76,11 @@
                                                            wire:loading.attr="disabled"
                                                            wire:key="answer-{{ $currentQuestion }}-{{ $answer->id }}"
                                                         {{ $selectedAnswer == $answer->id ? 'checked' : '' }}>
-                                                    <label class="form-check-label w-100 {{ 'wire-loading-disabled' }}"
+                                                    <label class="form-check-label ms-4 w-100 {{ 'wire-loading-disabled' }}"
                                                            for="answer{{ $answer->id }}"
                                                            wire:click="selectAnswer({{ $answer->id }})"
                                                            wire:loading.attr="disabled">
-                                                        <div class="card border-2 {{ $selectedAnswer == $answer->id ? 'border-primary bg-primary bg-opacity-10' : 'border-light' }} h-100">
+                                                        <div class="card mb-0 border-2 {{ $selectedAnswer == $answer->id ? 'border-primary bg-primary bg-opacity-10' : 'border-light' }} h-100">
                                                             <div class="card-body p-3 p-md-4">
                                                                 <div class="d-flex align-items-center">
                                                                 <span class="badge {{ $selectedAnswer == $answer->id ? 'bg-primary' : 'bg-light text-dark' }} me-3 flex-shrink-0 fs-6">
@@ -315,9 +329,13 @@
         <script>
             document.addEventListener('DOMContentLoaded', function() {
                 // Timer functionality
-                let timeRemaining = {{ $timeRemainingSeconds }};
+                let timeRemaining = {{ $timeRemainingSeconds }}; // Initialize with server-provided time
 
                 function updateTimer() {
+                    if (timeRemaining < 0) {
+                        timeRemaining = 0; // Prevent negative display
+                    }
+
                     const minutes = Math.floor(timeRemaining / 60);
                     const seconds = timeRemaining % 60;
                     const timerElement = document.getElementById('timer');
@@ -329,6 +347,7 @@
                     if (timeRemaining <= 0) {
                         // Auto-submit when time runs out
                         @this.call('submitExam');
+                        clearInterval(timerInterval); // Stop the timer
                         return;
                     }
 
@@ -338,16 +357,9 @@
                 // Update timer every second
                 const timerInterval = setInterval(updateTimer, 1000);
 
-                // Prevent accidental page refresh
-                let examSubmitted = false;
+                // No longer preventing accidental page refresh client-side; relying on server for persistence.
+                let examSubmitted = false; // Keep for Livewire event handling
 
-                window.addEventListener('beforeunload', function (e) {
-                    if (!examSubmitted) {
-                        e.preventDefault();
-                        e.returnValue = 'Are you sure you want to leave? Your progress may be lost.';
-                        return 'Are you sure you want to leave? Your progress may be lost.';
-                    }
-                });
 
                 // Clear timer and remove page leave warning when exam is submitted
                 window.addEventListener('examSubmitted', function() {
@@ -375,6 +387,7 @@
                 Livewire.hook('morph.updated', scrollToCurrentQuestion);
             });
         </script>
+
     @endpush
 </div>
 

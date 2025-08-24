@@ -48,7 +48,8 @@ class DatabaseSeeder extends Seeder
             //NotRealQuestionSeeder::class,
 
             //RealExamSeeder::class,
-            RealExamV2Seeder::class,
+            //RealExamV2Seeder::class,
+            RealExamTrialSeeder::class,
         ]);
     }
 }

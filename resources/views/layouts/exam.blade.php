@@ -16,7 +16,6 @@
     />
     <meta name="author" content="Ma Chung University" />
 
-    @vite('resources/css/app.css')
     <x-layouts.task.style />
 </head>
 
@@ -51,26 +50,5 @@
 <!-- [ Main Content ] end -->
 <x-layouts.task.script />
 
-@push('scripts')
-    <script>
-        document.addEventListener('livewire:initialized', () => {
-            // Initial render for the first question
-            MathJax.typesetPromise();
-
-            // Listen for Livewire updates to render new content
-            Livewire.hook('morph.updated', ({ el, component }) => {
-                // Check if the updated element is the question card
-                if (el.classList.contains('card')) {
-                    MathJax.typesetPromise([el]);
-                }
-            });
-
-            // Re-render when navigating with Livewire
-            Livewire.hook('navigated', () => {
-                MathJax.typesetPromise();
-            });
-        });
-    </script>
-@endpush
 </body>
 </html>

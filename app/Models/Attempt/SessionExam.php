@@ -16,6 +16,7 @@ class SessionExam extends Model {
         'exam_id',
         'user_id',
         'started_at',
+        'estimated_finished_at',
         'finished_at',
         'total_score',
         'total_questions',
@@ -26,6 +27,7 @@ class SessionExam extends Model {
 
     protected $casts = [
         'started_at' => 'datetime',
+        'estimated_finished_at' => 'datetime',
         'finished_at' => 'datetime',
         'percentage_score' => 'decimal:2',
     ];

@@ -1,6 +1,7 @@
 
 import katex from 'katex';
 import 'katex/dist/katex.min.css';
+import Sidebar from '@/layouts/bootstrap/SidebarBoost';
 
 const MatriksKaTeX = () => {
   const renderMath = (math) => {
@@ -9,11 +10,8 @@ const MatriksKaTeX = () => {
 
   return (
     <div>
-      <h1>Menampilkan Matriks dengan KaTeX</h1>
-      <p>Berikut adalah matriks 3x3 yang ditulis dengan LaTeX:</p>
-      <div>
-        {renderMath('\\begin{bmatrix} 1 & 2 & 3 \\\\ 4 & 5 & 6 \\\\ 7 & 8 & 9 \\end{bmatrix}')}
-      </div>
+        <Sidebar/>
+
     </div>
   );
 };

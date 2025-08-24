@@ -8,20 +8,7 @@
         "@/*": [
                 "./resources/js/*"
             ],
-        // "ziggy-js": ["./vendor/tightenco/ziggy"],
+
         },
     }
 }
- {
-     "compilerOptions": {
-     "strictNullChecks": true,
-     "strictFunctionTypes": true,
-     "baseUrl": ".",
-     "jsx": "react",
-     "paths": {
-         "@/*": [
-                 "./resources/js/*"
-             ]
-         }
-     }
- }

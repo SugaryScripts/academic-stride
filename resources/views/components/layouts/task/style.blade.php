@@ -21,7 +21,15 @@
 <link rel="stylesheet" href="{{ asset('assets/css/style-preset.css') }}" />
 {{--<script src="assets/js/tech-stack.js"></script>--}}
 <link rel="stylesheet" href="{{ asset('assets/css/landing.css') }}" />
-
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']]
+  }
+};
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 
 {{--@livewireStyles--}}
 @stack('styles')

@@ -13,7 +13,7 @@ class ExamController extends Controller
           $exams = Exam::all();
 
         // Kirim data 'exams' ke komponen frontend melalui Inertia
-        return Inertia::render('MyExam', [
+        return Inertia::render('ActiveExam', [
             'exams' => $exams,
         ]);
         }

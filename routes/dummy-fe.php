@@ -12,7 +12,7 @@ Route::get('/login', function () {
 });
 
 
-Route::get('/my-exam', function () {
+Route::get('/active-exam', function () {
     // Eager load 'sessionExams' dengan 'exam' yang mencakup kolom title dari exam dan user_id dari sessionExams
     $exams = Exam::with(['sessionExams' => function ($query) {
         $query->select('id', 'exam_id', 'user_id');
@@ -23,9 +23,9 @@ Route::get('/my-exam', function () {
     return Inertia::render('students/myExam', [
         'exams' => $exams,
     ]);
-})->name('my-exam');
+})->name('active-exam');
 
-Route::get('/recent-exam', function () {
+Route::get('/past-exam', function () {
     return Inertia::render('students/recentExam');
 });
 Route::get('/grade-exam', function () {

@@ -14,7 +14,7 @@ class Index {
         } elseif ($user->hasAnyRole('Admin','Analyser')) {
             return redirect()->route('homes');
         } elseif ($user->hasAnyRole('Admin','Student')) {
-            return redirect()->route('my-exam');
+            return redirect()->route('active-exam');
         }
 
         return redirect()->route('homes'); // fallback

@@ -8,7 +8,7 @@
                     <span class="badge bg-light-success rounded-pill ms-2 theme-version">v0.0.1</span>
                 </a>
             @elseif(auth()->user()->hasAnyRole('Student','Admin'))
-                <a href="{{ route('my-exam') }}" class="b-brand text-primary">
+                <a href="{{ route('active-exam') }}" class="b-brand text-primary">
                     <img src="{{ asset('logo/'.config('app.logo_dark')) }}" class="img-fluid logo-lg" alt="logo"/>
                     <span class="badge bg-light-success rounded-pill ms-2 theme-version">v0.0.1</span>
                 </a>
@@ -34,14 +34,12 @@
                         </a>
                     </li>
                 @elseif(auth()->user()->hasRole('Student'))
-                    <li class="pc-item {{ (request()->is('my-exam')) ? 'active' : '' }}">
-                        <a href="{{ route('my-exam') }}" class="pc-link">
+                    <li class="pc-item {{ (request()->is('active-exam')) ? 'active' : '' }}">
+                        <a href="{{ route('active-exam') }}" class="pc-link">
                         <span class="pc-micon">
-                          <svg class="pc-icon">
-                            <use xlink:href="#custom-status-up"></use>
-                          </svg>
-                        </span>
-                            <span class="pc-mtext">My Exam</span>
+                                                  <i class="fas fa-pencil-alt"></i>
+                                                </span>
+                            <span class="pc-mtext">Active Exams</span>
                         </a>
                     </li>
                 @endif
@@ -144,24 +142,30 @@
                 </li>
 
                 @else
-                    <li class="pc-item {{ ( request()->routeIs('recent-exam') ) ? 'pc-trigger active' : '' }}">
-                        <a href="{{ route('recent-exam') }}" class="pc-link">
+                    <li class="pc-item {{ ( request()->routeIs('past-exam') ) ? 'pc-trigger active' : '' }}">
+                        <a href="{{ route('past-exam') }}" class="pc-link">
                         <span class="pc-micon">
-                          <svg class="pc-icon">
-                            <use xlink:href="#custom-document"></use>
-                          </svg>
+                          <i class="fas fa-clipboard-check"></i>
                         </span>
-                            <span class="pc-mtext">Recent Exam</span>
+                            <span class="pc-mtext">Past Exams</span>
                         </a>
                     </li>
-                    <li class="pc-item {{ ( request()->routeIs('grade.detail') ) ? 'pc-trigger active' : '' }}">
-                        <a href="{{ route('grade.detail', ['id'=>Auth::user()->id]) }}" class="pc-link">
+                    <li class="pc-item {{ ( request()->routeIs('my-grades') ) ? 'pc-trigger active' : '' }}">
+                        <a href="{{ route('my-grades', ['id'=>Auth::user()->id]) }}" class="pc-link">
                         <span class="pc-micon">
                           <svg class="pc-icon">
-                            <use xlink:href="#custom-document"></use>
+                            <use xlink:href="#custom-status-up"></use>
                           </svg>
                         </span>
-                            <span class="pc-mtext">Grade Overall</span>
+                            <span class="pc-mtext">My Grades</span>
+                        </a>
+                    </li>
+                    <li class="pc-item {{ ( request()->routeIs('available-exam') ) ? 'pc-trigger active' : '' }}">
+                        <a href="{{ route('available-exam') }}" class="pc-link">
+                        <span class="pc-micon">
+                          <i class="fas fa-book"></i>
+                        </span>
+                            <span class="pc-mtext">Available Exams</span>
                         </a>
                     </li>
                 @endif

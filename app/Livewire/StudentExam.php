@@ -41,7 +41,7 @@ class StudentExam extends Component {
 
         // Check if exam is already completed or closed
         if (in_array($this->examSession->status, ['COMPLETED', 'CLOSED'])) {
-            return redirect()->route('recent-exam'); // Redirect to results or appropriate page
+            return redirect()->route('past-exam'); // Redirect to results or appropriate page
         }
 
         // 1. Ensure started_at is initialized correctly.
@@ -364,6 +364,6 @@ class StudentExam extends Component {
         // Dispatch event to remove client-side timer (if still running)
         $this->dispatch('examSubmitted');
 
-        return redirect()->route('recent-exam');
+        return redirect()->route('past-exam');
     }
 }

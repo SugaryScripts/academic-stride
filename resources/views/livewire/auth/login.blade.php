@@ -21,7 +21,7 @@ new #[Layout('layouts.auth', [
     public function mount(): void
     {
         if (session()->has('success-register')) {
-            \Jantinnerezo\LivewireAlert\Facades\LivewireAlert::title(session('success'))->success();
+            \Jantinnerezo\LivewireAlert\Facades\LivewireAlert::title(session('success'))->success()->show();
         }
     }
 
@@ -45,7 +45,7 @@ new #[Layout('layouts.auth', [
         Session::regenerate();
 
         if (Auth::user()->hasRole('Student'))
-            $this->redirectIntended(default: route('my-exam', absolute: false), navigate: false);
+            $this->redirectIntended(default: route('active-exam', absolute: false), navigate: false);
         else
             $this->redirectIntended(default: route('homes', absolute: false), navigate: false);
     }

@@ -4,7 +4,7 @@
     <nav class="navbar navbar-expand-md navbar-light default">
         <div class="container">
             <div class="d-inline-flex align-items-center">
-                <a class="navbar-brand" href="{{ route('my-exam') }}">
+                <a class="navbar-brand" href="{{ route('active-exam') }}">
                     <img src="{{ asset('logo/'.config('app.logo_dark')) }}" alt="logo" />
                 </a>
                 <a href="https://phoenixcoded.gitbook.io/able-pro/versioning" target="_blank">

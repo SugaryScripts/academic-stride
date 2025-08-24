@@ -1,5 +1,5 @@
 <x-slot name="page_title">
-    Grade Detail
+    My Grades
 </x-slot>
 
 <div class="pc-content">
@@ -10,12 +10,12 @@
                 <div class="col-md-12">
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href="javascript: void(0)">Grade</a></li>
-                        <li class="breadcrumb-item" aria-current="page">Detail</li>
+                        <li class="breadcrumb-item" aria-current="page">My Grades</li>
                     </ul>
                 </div>
                 <div class="col-md-12">
                     <div class="page-header-title">
-                        <h2 class="mb-0">Detail Grade</h2>
+                        <h2 class="mb-0">My Grades</h2>
                     </div>
                 </div>
             </div>

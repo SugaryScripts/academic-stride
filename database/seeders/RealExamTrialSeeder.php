@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Services\ExamSessionService;
 use App\Constants\QuestionTypeConstant;
 use App\Constants\SessionExamStatusConstant;
 use App\Constants\UserTypeConstant;
@@ -68,23 +69,10 @@ class RealExamTrialSeeder extends Seeder
 
                 DB::transaction(function () use ($educationLevel, $subject, $createdExams) {
                     $examTitle = "Trial Exam {$subject->name} - {$educationLevel->name}";
-                    $examDescription = "Trial exam for {$subject->name} in {$educationLevel->name} with {$this->trialQuestionCount} questions from combined sub-subjects.";
-
-                    // Check if exam already exists
-                    $exam = Exam::query()->firstOrCreate(
-                        [
-                            'title' => $examTitle,
-                        ],
-                        [
-                            'description' => $examDescription,
-                            'total_questions' => $this->trialQuestionCount,
-                            'duration_minutes' => 15, // Trial exams can have a shorter fixed duration
-                            'ref_education_code' => $educationLevel->code,
-                            'ref_education_id' => $educationLevel->id,
-                            'created_by' => User::query()->where('user_type_code', UserTypeConstant::ADMIN)->first()->id ?? User::first()->id,
-                            'is_active' => true,
-                        ]
-                    );
+                    $questionSourceDescription = $subject->children->isNotEmpty()
+                        ? "from combined sub-subjects"
+                        : "from {$subject->name}";
+                    $examDescription = "Trial exam for {$subject->name} in {$educationLevel->name} with {$this->trialQuestionCount} questions {$questionSourceDescription}.";
 
                     $questionsForExam = collect();
 
@@ -104,14 +92,29 @@ class RealExamTrialSeeder extends Seeder
                     }
 
                     if ($allQuestionsFromRelatedSubjects->isEmpty()) {
-                        $this->command->warn("No questions found for subject {$subject->name} or its sub-subjects. Skipping exam configuration.");
-                        return;
+                        $this->command->warn("No questions found for subject {$subject->name} or its sub-subjects. Skipping exam creation.");
+                        return; // Exit if no questions found
                     }
 
                     // Take a fixed number of random questions for the trial exam
                     $countToTake = min($this->trialQuestionCount, $allQuestionsFromRelatedSubjects->count());
                     $questionsForExam = $allQuestionsFromRelatedSubjects->random($countToTake)->shuffle();
 
+                    // Create Exam only if questions are available
+                    $exam = Exam::query()->firstOrCreate(
+                        [
+                            'title' => $examTitle,
+                        ],
+                        [
+                            'description' => $examDescription,
+                            'total_questions' => $this->trialQuestionCount,
+                            'duration_minutes' => 15, // Trial exams can have a shorter fixed duration
+                            'ref_education_code' => $educationLevel->code,
+                            'ref_education_id' => $educationLevel->id,
+                            'created_by' => User::query()->where('user_type_code', UserTypeConstant::ADMIN)->first()->id ?? User::first()->id,
+                            'is_active' => true,
+                        ]
+                    );
 
                     // Create ExamSubjectConfiguration for the parent subject
                     $examSubjectConfig = ExamSubjectConfiguration::firstOrCreate(
@@ -170,43 +173,34 @@ class RealExamTrialSeeder extends Seeder
                 $exam = $examData['exam'];
                 $questionsToAttach = $examData['questions'];
 
-                $this->command->info("Creating session for student {$student->name} for exam {$exam->title}");
+                $this->command->info("Creating session for student {$student->name} for exam {$exam->title} with status {$sessionStatus}");
 
-                // Create an ExamSession for the student and exam
-                $startedAt = ($sessionStatus === SessionExamStatusConstant::COMPLETED) ? now()->subHours(6) : null;
-                $finishedAt = ($sessionStatus === SessionExamStatusConstant::COMPLETED) ? now()->subHours(5) : null;
+                if ($sessionStatus === SessionExamStatusConstant::COMPLETED) {
+                    $startedAt = now()->subHours(6);
+                    $finishedAt = $startedAt->addHours(1);
 
-
-                $session = SessionExam::create([
-                    'exam_id' => $exam->id,
-                    'user_id' => $student->id,
-                    'started_at' => $startedAt,
-                    'finished_at' => $finishedAt,
-                    'total_questions' => $exam->total_questions,
-                    'status' => $sessionStatus,
-                ]);
-
-                // Attach questions to the ExamSession
-                foreach ($questionsToAttach as $questionIndex => $question) {
-                    $answerTextOptionIds = null;
-                    if ($question->ref_question_type_code === QuestionTypeConstant::MULTIPLE_CHOICE_TEXT) {
-                        $answerTextOptionIds = $question->answerTextOptions->pluck('id')->shuffle()->toArray();
-                    }
-
-                    $sessionQuestion = SessionQuestion::create([
-                        'session_exam_id' => $session->id,
-                        'question_id' => $question->id,
-                        'question_order' => $questionIndex + 1,
-                        'answer_options_shuffled' => $answerTextOptionIds,
+                    $session = SessionExam::create([
+                        'exam_id' => $exam->id,
+                        'user_id' => $student->id,
+                        'started_at' => $startedAt,
+                        'finished_at' => $finishedAt,
+                        'total_questions' => $exam->total_questions,
+                        'status' => $sessionStatus,
                     ]);
 
-                    // Create user answers only for COMPLETED sessions
-                    if ($sessionStatus === SessionExamStatusConstant::COMPLETED) {
+                    foreach ($questionsToAttach as $questionIndex => $question) {
+                        $answerTextOptionIds = $question->answerTextOptions->pluck('id')->shuffle()->toArray();
+
+                        $sessionQuestion = SessionQuestion::create([
+                            'session_exam_id' => $session->id,
+                            'question_id' => $question->id,
+                            'question_order' => $questionIndex + 1,
+                            'answer_options_shuffled' => $answerTextOptionIds,
+                        ]);
+
                         if ($question->ref_question_type_code === QuestionTypeConstant::MULTIPLE_CHOICE_TEXT) {
                             $correctAnswer = $question->answerTextOptions->where('is_correct', true)->first();
                             $allAnswers = $question->answerTextOptions;
-
-                            // 70% chance of selecting correct answer
                             $selectedAnswer = rand(1, 100) <= 70 ? $correctAnswer : $allAnswers->random();
 
                             if ($selectedAnswer) {
@@ -219,10 +213,7 @@ class RealExamTrialSeeder extends Seeder
                             }
                         }
                     }
-                }
 
-                // Update session scores for completed sessions
-                if ($sessionStatus === SessionExamStatusConstant::COMPLETED) {
                     $correctAnswers = UserAnswerTextOption::where('user_id', $student->id)
                         ->whereHas('sessionQuestion', function ($query) use ($session) {
                             $query->where('session_exam_id', $session->id);
@@ -232,9 +223,14 @@ class RealExamTrialSeeder extends Seeder
 
                     $session->update([
                         'correct_answers' => $correctAnswers,
-                        'total_score' => $correctAnswers * 5, // Assuming 5 points per question
+                        'total_score' => $correctAnswers * 5,
                         'percentage_score' => $session->total_questions > 0 ? round(($correctAnswers / $session->total_questions) * 100, 2) : 0,
                     ]);
+                } else {
+                    ExamSessionService::createExamSessionWithQuestions(
+                        $exam->id,
+                        $student->id
+                    );
                 }
             }
         }

@@ -1,5 +1,5 @@
 <x-slot name="page_title">
-    Grade Detail
+    My Grades
 </x-slot>
 
 <div class="pc-content">
@@ -10,12 +10,12 @@
                 <div class="col-md-12">
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href="javascript: void(0)">Grade</a></li>
-                        <li class="breadcrumb-item" aria-current="page">Detail</li>
+                        <li class="breadcrumb-item" aria-current="page">My Grades</li>
                     </ul>
                 </div>
                 <div class="col-md-12">
                     <div class="page-header-title">
-                        <h2 class="mb-0">Detail Grade</h2>
+                        <h2 class="mb-0">My Grades</h2>
                     </div>
                 </div>
             </div>
@@ -55,7 +55,9 @@
                                 </div>
                             </div>
                         </div>
-                        @livewire('charts.performance-chart', ['chartData' => $chartData, 'chartLabels' => $chartLabels])
+                        <div class="relative overflow-x-auto">
+                            @livewire('charts.performance-chart', ['chartData' => $chartData, 'chartLabels' => $chartLabels])
+                        </div>
                     @else
                         <div class="text-center py-5">
                             <i class="ti ti-chart-bar text-muted" style="font-size: 4rem;"></i>
@@ -74,54 +76,44 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h5 class="mb-1">Exam Sessions by Subject</h5>
-                    <p class="text-muted mb-0 small">First and latest completed exam sessions for each subject</p>
+                    <h5 class="mb-1">Exam Performance Overview</h5>
+                    <p class="text-muted mb-0 small">List of exams with total attempts and latest session details</p>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table table-hover">
                             <thead>
                                 <tr>
-                                    <th>Subject</th>
-                                    <th>First Session</th>
-                                    <th>Latest Session</th>
-                                    <th>Total Attempts</th>
+                                    <th>Exam Title</th>
+                                    <th>Attempts</th>
+                                    <th>Latest Score</th>
+                                    <th>Time</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($examSessions as $session)
+                                @foreach($examSessions as $examSession)
                                 <tr>
                                     <td>
-                                        <strong>{{ $session['subject'] }}</strong>
+                                        <strong>{{ $examSession['exam_title'] }}</strong>
                                     </td>
                                     <td>
-                                        <div class="d-flex flex-column">
-                                            <span class="badge bg-{{ $this->getScoreClass($session['first_session']->percentage_score) }} mb-1">
-                                                {{ $session['first_session']->percentage_score }}%
-                                            </span>
-                                            <small class="text-muted">
-                                                {{ $session['first_session']->finished_at->format('M d, Y') }}
-                                            </small>
-                                        </div>
+                                        <span class="badge bg-light text-dark">{{ $examSession['total_attempts'] }}</span>
                                     </td>
                                     <td>
-                                        <div class="d-flex flex-column">
-                                            <span class="badge bg-{{ $this->getScoreClass($session['latest_session']->percentage_score) }} mb-1">
-                                                {{ $session['latest_session']->percentage_score }}%
-                                            </span>
-                                            <small class="text-muted">
-                                                {{ $session['latest_session']->finished_at->format('M d, Y') }}
-                                            </small>
-                                        </div>
+                                        <span class="badge bg-{{ $this->getScoreClass($examSession['latest_session_score']) }} mb-1">
+                                            {{ $examSession['latest_session_score'] }}%
+                                        </span>
                                     </td>
                                     <td>
-                                        <span class="badge bg-light text-dark">{{ $session['total_attempts'] }}</span>
+                                        <small class="text-muted">
+                                            {{ $examSession['latest_session_finished_at']->format('M d, Y') }}
+                                        </small>
                                     </td>
                                     <td>
-                                        <button class="btn btn-sm btn-outline-primary" 
-                                                wire:click="scrollToExam({{ $session['latest_session']->id }})"
-                                                onclick="document.getElementById('exam-{{ $session['latest_session']->id }}').scrollIntoView({behavior: 'smooth'})">
+                                        <button class="btn btn-sm btn-outline-primary"
+                                                wire:click="scrollToExam({{ $examSession['latest_session_id'] }})"
+                                                onclick="document.getElementById('exam-{{ $examSession['latest_session_id'] }}').scrollIntoView({behavior: 'smooth'})">
                                             <i class="ti ti-chart-pie"></i> Analyze
                                         </button>
                                     </td>
@@ -146,8 +138,8 @@
                     <div class="card-header">
                         <h5 class="mb-1">{{ $examData['session']->exam->title }}</h5>
                         <p class="text-muted mb-0 small">
-                            Completed on {{ $examData['session']->finished_at->format('M d, Y H:i') }} | 
-                            Score: {{ $examData['session']->percentage_score }}% | 
+                            Completed on {{ $examData['session']->finished_at->format('M d, Y H:i') }} |
+                            Score: {{ $examData['session']->percentage_score }}% |
                             Subject: {{ $examData['session']->exam->subjectConfigurations->pluck('subject.name')->join(', ') }}
                         </p>
                     </div>
@@ -192,7 +184,68 @@
 
     @push('scripts')
         <script src="{{ asset('assets/js/plugins/apexcharts.min.js') }}"></script>
+
+        <!-- Floating Scroll-to-Top Button -->
+        <div class="floting-button">
+            <a href="javascript:void(0);" id="scroll-to-top-btn" class="btn btn-primary d-inline-flex align-items-center gap-2" data-bs-toggle="tooltip" title="Scroll to Top" style="display: none;">
+                <i class="ph-duotone ph-arrow-up"></i>
+                <span>Back to Top</span>
+            </a>
+        </div>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const scrollToTopBtn = document.getElementById('scroll-to-top-btn');
+                const examSessionsTable = document.querySelector('.table-responsive');
+
+                console.log('Scroll to Top Button (element):', scrollToTopBtn);
+                console.log('Exam Sessions Table Element (element):', examSessionsTable);
+
+                let tableOffsetTop = 500; // Default threshold
+
+                if (examSessionsTable) {
+                    tableOffsetTop = examSessionsTable.getBoundingClientRect().top + window.pageYOffset;
+                    console.log('Calculated tableOffsetTop:', tableOffsetTop);
+                } else {
+                    console.log('Exam Sessions Table element not found. Using default tableOffsetTop:', tableOffsetTop);
+                }
+
+                scrollToTopBtn.addEventListener('click', function() {
+                    console.log('Scroll to Top button clicked!');
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                });
+
+                // Initial check in case the page loads scrolled down
+                if (scrollToTopBtn) { // Add safety check for button existence
+                    if (window.scrollY > tableOffsetTop) {
+                        scrollToTopBtn.style.setProperty('display', 'flex', 'important');
+                        console.log('Button display set to flex !important (initial check)');
+                    } else {
+                        scrollToTopBtn.style.setProperty('display', 'none', 'important');
+                        console.log('Button display set to none !important (initial check)');
+                    }
+                } else {
+                    console.log('Scroll to Top Button not found on DOMContentLoaded');
+                }
+
+
+                window.onscroll = function() {
+                    if (scrollToTopBtn) { // Add safety check for button existence
+                        if (window.scrollY > tableOffsetTop) {
+                            scrollToTopBtn.style.setProperty('display', 'flex', 'important');
+                        } else {
+                            scrollToTopBtn.style.setProperty('display', 'none', 'important');
+                        }
+                    }
+                };
+            });
+
+        </script>
     @endpush
+
 
     {{--@livewire(\App\Livewire\Employee\UserModal::class)--}}
 </div>

@@ -13,7 +13,7 @@ class SubjectConstant {
     private const SCIENCE_SUB = self::SCIENCE . '-';
     public const PHYSICS = self::SCIENCE_SUB.'FISIKA';
     public const CHEMISTRY = self::SCIENCE_SUB.'KIMIA';
-    public const BIOLOGY = self::SCIENCE_SUB.'BIOLOGI';
+    public const BIOLOGY = self::SCIENCE_SUB.'BIOLGI';
 
     public const SOCIAL = 'IPS';
     private const SOCIAL_SUB = self::SOCIAL . '-';

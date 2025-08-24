@@ -2,8 +2,8 @@
 
 <script>
     window.Laravel = {
-        logoWhite: "{{ env('APP_LOGO_WHITE') }}",
-        logoDark: "{{ env('APP_LOGO_DARK') }}"
+        logoWhite: "{{ config('app.logo_dark') }}",
+        logoDark: "{{ config('app.logo_light') }}"
     };
 </script>
 

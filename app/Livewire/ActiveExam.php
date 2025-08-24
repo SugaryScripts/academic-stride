@@ -11,7 +11,7 @@ use Livewire\Component;
 use Livewire\WithoutUrlPagination;
 use Livewire\WithPagination;
 
-class MyExam extends Component {
+class ActiveExam extends Component {
     use WithPagination, WithoutUrlPagination;
 
     public string $selectedId = '';
@@ -19,6 +19,7 @@ class MyExam extends Component {
 
     protected $listeners = [
         'submitted' => '$refresh',
+        'refreshMyExams' => '$refresh',
     ];
 
     public function search() {
@@ -32,7 +33,7 @@ class MyExam extends Component {
     }
 
     public function render() {
-        return view('livewire.my-exam', [
+        return view('livewire.active-exam', [
             'data' => $this->fetchData(),
         ]);
     }

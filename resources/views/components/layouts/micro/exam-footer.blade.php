@@ -3,7 +3,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-4 wow fadeInUp" data-wow-delay="0.2s">
-                    <img src="{{ asset('logo/'.env('APP_LOGO_DARK')) }}" alt="image" class="img-fluid mb-3" />
+                    <img src="{{ asset('logo/'.config('app.logo_dark')) }}" alt="image" class="img-fluid mb-3" />
                     <p class="mb-4">
                         Here's the description about footer, where the user can explain things where nobody will be read.
                         So I can fill whatever i want about the descriptions. Maybe about butterflies?

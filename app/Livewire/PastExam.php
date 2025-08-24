@@ -8,7 +8,7 @@ use Livewire\Component;
 use Livewire\WithoutUrlPagination;
 use Livewire\WithPagination;
 
-class RecentExam extends Component {
+class PastExam extends Component {
     use WithPagination, WithoutUrlPagination;
 
     public string $selectedId = '';
@@ -29,7 +29,7 @@ class RecentExam extends Component {
     }
 
     public function render() {
-        return view('livewire.recent-exam', [
+        return view('livewire.past-exam', [
             'data' => $this->fetchData(),
         ]);
     }

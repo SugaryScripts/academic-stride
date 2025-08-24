@@ -16,7 +16,6 @@
     />
     <meta name="author" content="Ma Chung University" />
 
-    @vite('resources/css/app.css')
     <x-layouts.task.style />
 </head>
 

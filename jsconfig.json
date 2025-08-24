@@ -1,13 +1,14 @@
- {
-     "compilerOptions": {
-     "strictNullChecks": true,
-     "strictFunctionTypes": true,
-     "baseUrl": ".",
-     "jsx": "react",
-     "paths": {
-         "@/*": [
-                 "./resources/js/*"
-             ]
-         }
-     }
- }
+{
+    "compilerOptions": {
+        "strictNullChecks": true,
+        "strictFunctionTypes": true,
+        "baseUrl": ".",
+        "jsx": "react",
+        "paths": {
+            "@/*": [
+                "./resources/js/*"
+            ],
+
+        },
+    }
+}

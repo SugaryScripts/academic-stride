@@ -4,11 +4,11 @@
     <nav class="navbar navbar-expand-md navbar-light default">
         <div class="container">
             <div class="d-inline-flex align-items-center">
-                <a class="navbar-brand" href="index.html">
-                    <img src="{{ asset('logo/'.env('APP_LOGO_DARK')) }}" alt="logo" />
+                <a class="navbar-brand" href="{{ route('active-exam') }}">
+                    <img src="{{ asset('logo/'.config('app.logo_dark')) }}" alt="logo" />
                 </a>
                 <a href="https://phoenixcoded.gitbook.io/able-pro/versioning" target="_blank">
-                    <div class="badge text-bg-light border-1 border rounded-pill" data-bs-toggle="tooltip" data-bs-title="Product Version">v9.5.1</div>
+                    <div class="badge text-bg-light border-1 border rounded-pill" data-bs-toggle="tooltip" data-bs-title="Product Version">v0.0.1</div>
                 </a>
             </div>
             <button

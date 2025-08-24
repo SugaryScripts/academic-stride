@@ -1,19 +1,23 @@
 <?php
 
+use App\Constants\UserTypeConstant;
+use App\Models\Account\Student;
 use App\Models\Account\User;
-use Illuminate\Support\Facades\Auth;
+use App\Models\Attempt\SessionExam;
+use App\Models\MasterType\RefMasterType;
 use Illuminate\Support\Facades\Hash;
+use Jantinnerezo\LivewireAlert\Facades\LivewireAlert as LivewireAlert;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Validate;
 use Livewire\Volt\Component;
 use App\Models\MasterType\RefEducation;
 
-new #[Layout('layouts.auth',[
+new #[Layout('layouts.auth', [
     'page_title' => 'Register new account'
 ])] class extends Component {
     // TODO: Real size NISN
-    #[Validate('required|string|digits:10')]
-    public string $nisn;
+    #[Validate('required|string|digits:10|unique:users,username')]
+        public string $nisn;
     #[Validate('required|string|max:255')]
     public string $name;
 
@@ -29,8 +33,7 @@ new #[Layout('layouts.auth',[
     #[Validate('required|same:password')]
     public string $password_confirmation;
 
-    public function mount()
-    {
+    public function mount() {
         $this->education_levels = RefEducation::all();
     }
 
@@ -39,41 +42,39 @@ new #[Layout('layouts.auth',[
         //\Barryvdh\Debugbar\Facades\Debugbar::info('Register clicked');
 
         try {
-            $ref_user_type = \App\Models\MasterType\RefMasterType::where('code', \App\Constants\UserTypeConstant::STUDENT)->firstOrFail();
+            $ref_user_type = RefMasterType::where('code', UserTypeConstant::STUDENT)->firstOrFail();
             $user = User::create([
                 'username' => $this->nisn,
                 'name' => $this->name,
                 'password' => Hash::make($this->password),
-                'user_type_code' => \App\Constants\UserTypeConstant::STUDENT,
+                'user_type_code' => UserTypeConstant::STUDENT,
                 'ref_user_type_id' => $ref_user_type->id
             ]);
             $user->assignRole('Student');
 
-            \App\Models\Account\Student::create([
+            Student::create([
                 'user_id' => $user->id,
                 'nisn' => $this->nisn,
                 'phone' => $this->phone,
                 'ref_education_id' => $this->ref_education_id,
             ]);
 
-            \App\Models\Attempt\SessionExam::create([
-
-            ])
-
             //\Barryvdh\Debugbar\Facades\Debugbar::info('Register success');
             session()->flash('success', 'Akun berhasil didaftarkan!');
             $this->clearVars();
             return redirect()->route('login')->with('success-register', 'Akun berhasil didaftarkan!');
-        } catch (\Exception $e) {
-            \Jantinnerezo\LivewireAlert\Facades\LivewireAlert::title('Gagal!')
-                ->text($e->getMessage())->error();
+        } catch (Exception $e) {
+            LivewireAlert::title('Gagal!')
+                ->text($e->getMessage())
+                ->error()
+                ->show();
             //\Barryvdh\Debugbar\Facades\Debugbar::info('Register failed');
             session()->flash('error', 'Pendaftaran akun gagal: ' . $e->getMessage());
         }
         //\Barryvdh\Debugbar\Facades\Debugbar::info('Register anomaly detected');
     }
 
-    private function clearVars(){
+    private function clearVars() {
         $this->reset();
         $this->resetErrorBag();
         $this->resetValidation();
@@ -91,7 +92,8 @@ new #[Layout('layouts.auth',[
                 <div class="card-body">
 
                     <div class="text-center mb-3">
-                        <a href=""><img style="max-width: 50%" src="{{ asset('logo/'.config('app.logo_dark')) }}" alt="img" /></a>
+                        <a href=""><img style="max-width: 50%" src="{{ asset('logo/'.config('app.logo_dark')) }}"
+                                        alt="img"/></a>
                     </div>
 
                     @if(session('success'))
@@ -124,14 +126,14 @@ new #[Layout('layouts.auth',[
                             </x-form.select>
                         </div>
                         <div class="mb-3">
-                            <x-form.input wire:model="phone" placeholder="Phone Number" />
+                            <x-form.input wire:model="phone" placeholder="Phone Number"/>
                         </div>
                         <div class="mb-3">
-                            <x-form.input wire:model="password" type="password" placeholder="Password" />
+                            <x-form.input wire:model="password" type="password" placeholder="Password"/>
                         </div>
                         <div class="mb-3">
                             <x-form.input wire:model="password_confirmation" type="password"
-                                          placeholder="Confirm Password" />
+                                          placeholder="Confirm Password"/>
                         </div>
                         <div class="d-grid mt-4">
                             <button type="submit" class="btn btn-primary">Sign up</button>

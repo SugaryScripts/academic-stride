@@ -65,10 +65,14 @@ class ExamSessionSeeder extends Seeder
 
         // Attach questions to session in random order
         foreach ($questions->shuffle() as $index => $question) {
+            // Get answer options, shuffle their IDs, and store
+            $answerTextOptionIds = $question->answerTextOptions->pluck('id')->shuffle()->toArray();
+
             SessionQuestion::create([
                 'session_exam_id' => $session->id,
                 'question_id' => $question->id,
                 'question_order' => $index + 1,
+                'answer_options_shuffled' => $answerTextOptionIds,
             ]);
         }
 

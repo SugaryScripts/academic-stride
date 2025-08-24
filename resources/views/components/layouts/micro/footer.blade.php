@@ -11,9 +11,9 @@
             <div class="col-auto my-1">
                 <ul class="list-inline footer-link mb-0">
                     @if(auth()->user()->hasAnyRole('Educator','Analyser'))
-                        <li class="list-inline-item"><a href="{{ route('home') }}">Home</a></li>
+                        <li class="list-inline-item"><a href="{{ route('homes') }}">Home</a></li>
                     @elseif(auth()->user()->hasRole('Student'))
-                        <li class="list-inline-item"><a href="{{ route('my-exam') }}">Home</a></li>
+                        <li class="list-inline-item"><a href="{{ route('active-exam') }}">Home</a></li>
                     @endif
                 </ul>
             </div>

@@ -34,7 +34,7 @@ export default function Sidebar() {
           Navigation
         </h3>
         <div className="space-y-2">
-          <NavItem icon={LayoutDashboard} text="My Exam" route="/my-exam" />
+          <NavItem icon={LayoutDashboard} text="My Exam" route="/active-exam" />
           <NavItem icon={FileText} text="Recent Exam" route="/recent-exam" />
           <NavItem icon={FileText} text="Grade Overall" route="/grade-exam" />
           <NavItem icon={LogOut} text="Log Out" route="/logout" />

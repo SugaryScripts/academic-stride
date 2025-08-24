@@ -1,5 +1,5 @@
 <x-slot name="page_title">
-    Recent Exam
+    Past Exams
 </x-slot>
 {{-- The best athlete wants his opponent at his best. --}}
 
@@ -11,12 +11,12 @@
                 <div class="col-md-12">
                     <ul class="breadcrumb">
                         {{--<li class="breadcrumb-item"><a href="javascript: void(0)">Employee</a></li>--}}
-                        <li class="breadcrumb-item" aria-current="page">Recent Exam</li>
+                        <li class="breadcrumb-item" aria-current="page">Past Exams</li>
                     </ul>
                 </div>
                 <div class="col-md-12">
                     <div class="page-header-title">
-                        <h2 class="mb-0">Recent Exam</h2>
+                        <h2 class="mb-0">Past Exams</h2>
                     </div>
                 </div>
             </div>

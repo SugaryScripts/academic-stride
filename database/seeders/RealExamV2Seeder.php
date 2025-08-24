@@ -16,7 +16,7 @@ use App\Models\MasterType\RefEducation;
 use App\Models\MasterType\RefSubject;
 use Illuminate\Database\Seeder;
 
-class RealExamV2Seeder extends Seeder {
+class   RealExamV2Seeder extends Seeder {
 
     protected bool $randomizeQuestions = true; // Toggle for question randomization
 
@@ -27,17 +27,17 @@ class RealExamV2Seeder extends Seeder {
         $this->command->info("Starting RealExamV2Seeder...");
 
         $subSubjectQuestionCounts = [
-            'MATH' => 98,
-            'IND' => 116,
+            'MATH' => 24,
+            'IND' => 27,
             'ENG' => 0,
-            'IPA-FISIKA' => 86,
-            'IPA-KIMIA' => 73,
-            'IPA-BIOLOGI' => 98,
-            'IPS-SOSIOG' => 63,
-            'IPS-GEOGGI' => 110,
-            'IPS-EKONMI' => 14,
-            'IPS-SEJARH' => 20,
-            'IPS-ANTRGI' => 8,
+            'IPA-FISIKA' => 21,
+            'IPA-KIMIA' => 18,
+            'IPA-BIOLOGI' => 24,
+            'IPS-SOSIOG' => 15,
+            'IPS-GEOGGI' => 27,
+            'IPS-EKONMI' => 12,
+            'IPS-SEJARH' => 18,
+            'IPS-ANTRGI' => 6,
         ];
 
         // Get reference data
@@ -97,52 +97,35 @@ class RealExamV2Seeder extends Seeder {
         $completedSessionStudents = $students->take($half);
         $openSessionStudents = $students->slice($half);
 
-        $this->command->info("Processing students for completed sessions...");
-        $this->processStudents($completedSessionStudents, $educators, $educations, $subjects, $parentSubjectQuestionCounts, SessionExamStatusConstant::COMPLETED);
+        $createdExams = collect();
 
-        $this->command->info("Processing students for open sessions...");
-        $this->processStudents($openSessionStudents, $educators, $educations, $subjects, $parentSubjectQuestionCounts, SessionExamStatusConstant::OPEN);
-
-        $this->command->info("RealExamV2Seeder finished.");
-    }
-
-    private function processStudents($students, $educators, $educations, $subjects, $parentSubjectQuestionCounts, $sessionStatus) {
-        foreach ($students as $student) {
-            $this->command->info("Processing student: {$student->name} (ID: {$student->id}) for status: {$sessionStatus}");
-
-            // Get student's education level
-            $studentEducation = $educations->firstWhere('id', $student->student->ref_education_id);
-
-            if (!$studentEducation) {
-                $this->command->warn("Student {$student->name} (ID: {$student->id}) has no associated education level. Skipping.");
-                continue;
-            }
-
-            // Iterate over parent subjects (from the pre-calculated $parentSubjectQuestionCounts)
+        // Create exams first, outside the student loop
+        $this->command->info("Creating exams for each education level and subject...");
+        foreach ($educations as $education) {
             foreach ($parentSubjectQuestionCounts as $parentSubjectCode => $details) {
                 $parentSubject = $details['subject'];
                 $totalParentQuestions = $details['total_questions'];
                 $childrenDetails = collect($details['children_details']);
 
-                // Only process subjects relevant to the student's education level
-                if ($parentSubject->ref_education_id !== $studentEducation->id) {
+                // Only process subjects relevant to the education level
+                if ($parentSubject->ref_education_id !== $education->id) {
                     continue;
                 }
 
                 if ($totalParentQuestions === 0) {
-                    $this->command->warn("No questions required for parent subject {$parentSubject->name} ({$parentSubject->code}). Skipping exam creation.");
+                    $this->command->warn("No questions required for parent subject {$parentSubject->name} ({$parentSubject->code}) for education {$education->name}. Skipping exam creation.");
                     continue;
                 }
 
-                $this->command->info("Creating exam for parent subject: {$parentSubject->name} ({$parentSubject->code}) for student's education level: {$studentEducation->name}");
+                $this->command->info("Creating exam for parent subject: {$parentSubject->name} ({$parentSubject->code}) for education level: {$education->name}");
 
-                // Create an Exam entry for the parent subject
-                $examTitle = "Ujian {$parentSubject->name} - {$studentEducation->name}";
+                $examTitle = "Ujian {$parentSubject->name} - {$education->name}";
                 $exam = Exam::create([
                     'title' => $examTitle,
                     'created_by' => $educators->random()->id,
-                    'ref_education_id' => $studentEducation->id,
-                    'ref_education_code' => $studentEducation->code,
+                    'ref_education_id' => $education->id,
+                    'ref_education_code' => $education->code,
+                    'duration_minutes' => 1,
                     'total_questions' => $totalParentQuestions,
                     'is_active' => true,
                 ]);
@@ -153,10 +136,9 @@ class RealExamV2Seeder extends Seeder {
                     $childSubject = $childDetail['subject'];
                     $targetQuestionCount = $childDetail['question_count'];
 
-                    // Retrieve existing questions for each child subject and education level
                     $existingQuestions = Question::where('ref_subject_id', $childSubject->id)
-                        ->whereHas('subject.education', function ($query) use ($studentEducation) {
-                            $query->where('code', $studentEducation->code);
+                        ->whereHas('subject.education', function ($query) use ($education) {
+                            $query->where('code', $education->code);
                         })
                         ->get();
 
@@ -166,11 +148,13 @@ class RealExamV2Seeder extends Seeder {
                     }
 
                     $currentQuestionCount = $existingQuestions->count();
+                    $childQuestions = collect();
 
                     if ($currentQuestionCount < $targetQuestionCount) {
                         $this->command->info("Duplicating questions for {$childSubject->name} (Current: {$currentQuestionCount}, Target: {$targetQuestionCount})");
-                        // Duplicate existing questions to meet the target count
+                        // Add existing questions
                         $childQuestions = $existingQuestions;
+                        // Duplicate existing questions to meet the target count
                         $needed = $targetQuestionCount - $currentQuestionCount;
                         for ($i = 0; $i < $needed; $i++) {
                             $originalQuestion = $existingQuestions->random();
@@ -190,21 +174,21 @@ class RealExamV2Seeder extends Seeder {
                             }
                             $childQuestions->push($duplicatedQuestion);
                         }
-                        $questionsToAttach = $questionsToAttach->merge($childQuestions);
                     } else {
                         // If enough questions exist, just take the required amount
-                        $selectedQuestions = $existingQuestions->random($targetQuestionCount);
-                        if ($this->randomizeQuestions) {
-                            $selectedQuestions = $selectedQuestions->shuffle();
-                        }
-                        $questionsToAttach = $questionsToAttach->merge($selectedQuestions);
+                        $childQuestions = $existingQuestions->random($targetQuestionCount);
                     }
+
+                    if ($this->randomizeQuestions) {
+                        $childQuestions = $childQuestions->shuffle();
+                    }
+                    $questionsToAttach = $questionsToAttach->merge($childQuestions);
                 }
 
-                // If no questions were attached, skip session creation for this exam
+                // If no questions were attached, delete the exam and skip it
                 if ($questionsToAttach->isEmpty()) {
-                    $this->command->warn("No questions attached to exam: {$exam->title}. Skipping session creation.");
-                    $exam->delete(); // Delete the exam if no questions were attached
+                    $this->command->warn("No questions attached to exam: {$exam->title}. Deleting exam and skipping.");
+                    $exam->delete();
                     continue;
                 }
 
@@ -214,14 +198,58 @@ class RealExamV2Seeder extends Seeder {
                     $questionCount = $childDetail['question_count'];
                     ExamSubjectConfiguration::create([
                         'exam_id' => $exam->id,
-                        'ref_subject_id' => $childSubject->id, // This is still the child subject
+                        'ref_subject_id' => $childSubject->id,
                         'question_count' => $questionCount,
                     ]);
                 }
 
+                // Store the created exam along with its attached questions
+                $createdExams->push([
+                    'exam' => $exam,
+                    'questions' => $questionsToAttach,
+                    'education_id' => $education->id,
+                ]);
+            }
+        }
+
+        $this->command->info("Processing students for completed sessions...");
+        $this->processStudents($completedSessionStudents, $educators, $educations, $createdExams, SessionExamStatusConstant::COMPLETED);
+
+        $this->command->info("Processing students for open sessions...");
+        $this->processStudents($openSessionStudents, $educators, $educations, $createdExams, SessionExamStatusConstant::OPEN);
+
+        $this->command->info("RealExamV2Seeder finished.");
+    }
+
+    private function processStudents($students, $educators, $educations, $createdExams, $sessionStatus) {
+        foreach ($students as $student) {
+            $this->command->info("Processing student: {$student->name} (ID: {$student->id}) for status: {$sessionStatus}");
+
+            // Get student's education level
+            $studentEducation = $educations->firstWhere('id', $student->student->ref_education_id);
+
+            if (!$studentEducation) {
+                $this->command->warn("Student {$student->name} (ID: {$student->id}) has no associated education level. Skipping.");
+                continue;
+            }
+
+            // Iterate over exams relevant to the student's education level
+            $relevantExams = $createdExams->where('education_id', $studentEducation->id);
+
+            if ($relevantExams->isEmpty()) {
+                $this->command->warn("No exams found for education level {$studentEducation->name}. Skipping session creation for student {$student->name}.");
+                continue;
+            }
+
+            foreach ($relevantExams as $examData) {
+                $exam = $examData['exam'];
+                $questionsToAttach = $examData['questions'];
+
+                $this->command->info("Creating session for student {$student->name} for exam {$exam->title}");
+
                 // Create an ExamSession for the student and exam
                 $startedAt = ($sessionStatus === SessionExamStatusConstant::COMPLETED) ? now()->subHours(6) : null;
-                $finishedAt = ($sessionStatus === SessionExamStatusConstant::COMPLETED) ? $startedAt->addHours(1) : null; // Example: 2 hours later for completed
+                $finishedAt = ($sessionStatus === SessionExamStatusConstant::COMPLETED) ? $startedAt->addHours(1) : null;
 
                 $session = SessionExam::create([
                     'exam_id' => $exam->id,
@@ -234,10 +262,14 @@ class RealExamV2Seeder extends Seeder {
 
                 // Attach questions to the ExamSession
                 foreach ($questionsToAttach as $questionIndex => $question) {
+                    // Get answer options, shuffle their IDs, and store
+                    $answerTextOptionIds = $question->answerTextOptions->pluck('id')->shuffle()->toArray();
+
                     $sessionQuestion = SessionQuestion::create([
                         'session_exam_id' => $session->id,
                         'question_id' => $question->id,
                         'question_order' => $questionIndex + 1,
+                        'answer_options_shuffled' => $answerTextOptionIds,
                     ]);
 
                     // Create user answers only for COMPLETED sessions
@@ -258,8 +290,6 @@ class RealExamV2Seeder extends Seeder {
                                 ]);
                             }
                         }
-                        // For essay questions in completed sessions, no specific answer option is selected.
-                        // The 'is_correct' status for essay questions would typically be determined by manual grading.
                     }
                 }
 
@@ -274,7 +304,7 @@ class RealExamV2Seeder extends Seeder {
 
                     $session->update([
                         'correct_answers' => $correctAnswers,
-                        'total_score' => $correctAnswers * 5, // 5 points per correct answer
+                        'total_score' => $correctAnswers * 5,
                         'percentage_score' => $session->total_questions > 0 ? round(($correctAnswers / $session->total_questions) * 100, 2) : 0,
                     ]);
                 }

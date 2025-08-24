@@ -1,8 +1,8 @@
 
 <script>
     window.Laravel = {
-        logoWhite: "{{ env('APP_LOGO_WHITE') }}",
-        logoDark: "{{ env('APP_LOGO_DARK') }}"
+        logoWhite: "{{ config('app.logo_dark') }}",
+        logoDark: "{{ config('app.logo_light') }}"
     };
 </script>
 
@@ -84,31 +84,4 @@
     // marquee end
 </script>
 
-
 @stack('scripts')
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-    MathJax = {
-        tex: {
-            inlineMath: [['$', '$'], ['\\(', '\\)']]
-        },
-        svg: {
-            fontCache: 'global'
-        }
-    };
-</script>
-<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-@livewireScripts
-<script>
-    document.addEventListener("livewire:navigated", () => {
-        if (window.MathJax) {
-            MathJax.typesetPromise();
-        }
-    });
-
-    Livewire.hook('morph.updated', () => {
-        if (window.MathJax) {
-            MathJax.typesetPromise();
-        }
-    });
-</script>

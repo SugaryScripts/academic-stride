@@ -35,8 +35,8 @@ Route::middleware('auth')->group(function () {
             ->name('grade');
     });
 
-    Route::get('grade/{id}', \App\Livewire\GradeDetail::class)
-        ->name('grade.detail');
+    Route::get('my-grades/{id}', \App\Livewire\GradeDetail::class)
+        ->name('my-grades');
 
     Route::middleware('role:Educator|Analyser|Admin')->group(function () {
 
@@ -49,14 +49,16 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::middleware('role:Student|Admin')->group(function () {
-        Route::get('my-exam', \App\Livewire\MyExam::class)
-            ->name('my-exam');
+        Route::get('active-exam', \App\Livewire\ActiveExam::class)
+            ->name('active-exam');
 
         Route::get('student-exam/{id}', \App\Livewire\StudentExam::class)
             ->name('student-exam');
 
-        Route::get('recent-exam', \App\Livewire\RecentExam::class)
-            ->name('recent-exam');
+        Route::get('past-exams', \App\Livewire\PastExam::class)
+            ->name('past-exam');
+        Route::get('available-exams', \App\Livewire\AvailableExams::class)
+            ->name('available-exam');
     });
 
     Route::get('session-exam', \App\Livewire\SessionExam::class)

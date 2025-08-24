@@ -10,7 +10,7 @@ const withMainLayout = (WrappedComponent, hideSidebar = false) => {
       setIsSidebarOpen(!isSidebarOpen);
     };
 
-    const sidebarClass = isSidebarOpen ? 'translate-x-0' : '-translate-x-full';
+    const sidebarClass = isSidebarOpen ? 'translate-x-0' : '-translate-x-full mr-0';
     const mainContentClass = isSidebarOpen && !hideSidebar ? 'ml-64' : 'ml-0';
 
     return (

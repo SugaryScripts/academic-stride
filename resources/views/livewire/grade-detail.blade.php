@@ -55,7 +55,9 @@
                                 </div>
                             </div>
                         </div>
-                        @livewire('charts.performance-chart', ['chartData' => $chartData, 'chartLabels' => $chartLabels])
+                        <div class="relative overflow-x-auto">
+                            @livewire('charts.performance-chart', ['chartData' => $chartData, 'chartLabels' => $chartLabels])
+                        </div>
                     @else
                         <div class="text-center py-5">
                             <i class="ti ti-chart-bar text-muted" style="font-size: 4rem;"></i>
@@ -136,8 +138,8 @@
                     <div class="card-header">
                         <h5 class="mb-1">{{ $examData['session']->exam->title }}</h5>
                         <p class="text-muted mb-0 small">
-                            Completed on {{ $examData['session']->finished_at->format('M d, Y H:i') }} | 
-                            Score: {{ $examData['session']->percentage_score }}% | 
+                            Completed on {{ $examData['session']->finished_at->format('M d, Y H:i') }} |
+                            Score: {{ $examData['session']->percentage_score }}% |
                             Subject: {{ $examData['session']->exam->subjectConfigurations->pluck('subject.name')->join(', ') }}
                         </p>
                     </div>

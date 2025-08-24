@@ -1,14 +1,10 @@
 import './bootstrap';
 import '../css/app.css';
+import '../css/style-preset.css';
 
 import { createInertiaApp } from '@inertiajs/react'
 import { createRoot } from 'react-dom/client'
 import { StrictMode } from 'react';
-import Alpine from 'alpinejs';
-
-window.Alpine = Alpine;
-
-Alpine.start();
 
 createInertiaApp({
  resolve: name => {

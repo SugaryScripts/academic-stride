@@ -74,54 +74,44 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h5 class="mb-1">Exam Sessions by Subject</h5>
-                    <p class="text-muted mb-0 small">First and latest completed exam sessions for each subject</p>
+                    <h5 class="mb-1">Exam Performance Overview</h5>
+                    <p class="text-muted mb-0 small">List of exams with total attempts and latest session details</p>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table table-hover">
                             <thead>
                                 <tr>
-                                    <th>Subject</th>
-                                    <th>First Session</th>
-                                    <th>Latest Session</th>
-                                    <th>Total Attempts</th>
+                                    <th>Exam Title</th>
+                                    <th>Attempts</th>
+                                    <th>Latest Score</th>
+                                    <th>Time</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($examSessions as $session)
+                                @foreach($examSessions as $examSession)
                                 <tr>
                                     <td>
-                                        <strong>{{ $session['subject'] }}</strong>
+                                        <strong>{{ $examSession['exam_title'] }}</strong>
                                     </td>
                                     <td>
-                                        <div class="d-flex flex-column">
-                                            <span class="badge bg-{{ $this->getScoreClass($session['first_session']->percentage_score) }} mb-1">
-                                                {{ $session['first_session']->percentage_score }}%
-                                            </span>
-                                            <small class="text-muted">
-                                                {{ $session['first_session']->finished_at->format('M d, Y') }}
-                                            </small>
-                                        </div>
+                                        <span class="badge bg-light text-dark">{{ $examSession['total_attempts'] }}</span>
                                     </td>
                                     <td>
-                                        <div class="d-flex flex-column">
-                                            <span class="badge bg-{{ $this->getScoreClass($session['latest_session']->percentage_score) }} mb-1">
-                                                {{ $session['latest_session']->percentage_score }}%
-                                            </span>
-                                            <small class="text-muted">
-                                                {{ $session['latest_session']->finished_at->format('M d, Y') }}
-                                            </small>
-                                        </div>
+                                        <span class="badge bg-{{ $this->getScoreClass($examSession['latest_session_score']) }} mb-1">
+                                            {{ $examSession['latest_session_score'] }}%
+                                        </span>
                                     </td>
                                     <td>
-                                        <span class="badge bg-light text-dark">{{ $session['total_attempts'] }}</span>
+                                        <small class="text-muted">
+                                            {{ $examSession['latest_session_finished_at']->format('M d, Y') }}
+                                        </small>
                                     </td>
                                     <td>
-                                        <button class="btn btn-sm btn-outline-primary" 
-                                                wire:click="scrollToExam({{ $session['latest_session']->id }})"
-                                                onclick="document.getElementById('exam-{{ $session['latest_session']->id }}').scrollIntoView({behavior: 'smooth'})">
+                                        <button class="btn btn-sm btn-outline-primary"
+                                                wire:click="scrollToExam({{ $examSession['latest_session_id'] }})"
+                                                onclick="document.getElementById('exam-{{ $examSession['latest_session_id'] }}').scrollIntoView({behavior: 'smooth'})">
                                             <i class="ti ti-chart-pie"></i> Analyze
                                         </button>
                                     </td>

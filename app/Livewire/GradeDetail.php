@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Attempt\SessionExam;
+use App\Models\Assessment\Exam;
 use Livewire\Component;
 use Livewire\Attributes\Computed;
 
@@ -51,19 +52,26 @@ class GradeDetail extends Component
             }
         }
 
-        // Process exam sessions for table
-        $this->examSessions = [];
-        foreach ($subjectSessions as $subjectKey => $sessions) {
-            $firstSession = collect($sessions)->sortBy('finished_at')->first();
-            $latestSession = collect($sessions)->sortByDesc('finished_at')->first();
+        // Process exam sessions for table based on exams
+        $examAttempts = SessionExam::where('user_id', $this->selected_id)
+            ->where('status', \App\Constants\SessionExamStatusConstant::COMPLETED)
+            ->with('exam')
+            ->get()
+            ->groupBy('exam_id');
 
-            $this->examSessions[] = [
-                'subject' => $subjectKey,
-                'first_session' => $firstSession,
-                'latest_session' => $latestSession,
-                'total_attempts' => count($sessions)
+        $this->examSessions = $examAttempts->map(function ($sessions, $examId) {
+            $exam = $sessions->first()->exam;
+            $latestSession = $sessions->sortByDesc('finished_at')->first();
+
+            return [
+                'exam_id' => $examId,
+                'exam_title' => $exam->title,
+                'total_attempts' => $sessions->count(),
+                'latest_session_id' => $latestSession->id, // Store for scrolling
+                'latest_session_score' => $latestSession->percentage_score,
+                'latest_session_finished_at' => $latestSession->finished_at
             ];
-        }
+        })->values()->toArray();
 
         arsort($subjectScores);
 
@@ -94,13 +102,11 @@ class GradeDetail extends Component
         return ['grade' => 'F', 'label' => 'Poor', 'class' => 'danger'];
     }
 
-    public function scrollToExam($examId)
+    public function scrollToExam($sessionId)
     {
-        $this->dispatch('scroll-to-exam', examId: $examId);
+        $this->dispatch('scroll-to-exam', sessionId: $sessionId);
     }
-
-
-
+    
     private function loadExamProficiencyData()
     {
         $allSessions = SessionExam::where('user_id', $this->selected_id)
@@ -110,7 +116,8 @@ class GradeDetail extends Component
                 'sessionQuestions.question.proficiencyDetail.header',
                 'sessionQuestions.userAnswerTextOption'
             ])
-            ->get();
+            ->get()
+            ->sortByDesc('finished_at'); // Ensure latest sessions are processed first for display consistency
 
         $this->examProficiencyData = [];
 

@@ -11,7 +11,7 @@ class Student extends Model {
 
     protected $fillable = [
         'ref_education_code', 'ref_education_id',
-        'user_id'
+        'nisn', 'phone', 'user_id'
     ];
 
     /**

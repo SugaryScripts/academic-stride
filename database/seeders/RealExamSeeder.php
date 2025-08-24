@@ -23,25 +23,18 @@ class RealExamSeeder extends Seeder {
     public function run(): void {
         $this->command->info("Starting RealExamSeeder...");
 
-        // Define required question counts per subject
-        /*$requiredQuestionCounts = [
-            'MATH' => 24,
-            'IND' => 27,
-            'ENG' => 27,
-            'IPA' => 63,
-            'IPS' => 78,
-        ];*/
         $requiredQuestionCounts = [
-            //'MATH' => 5,
-            'IND' => 20,
-            /*'ENG' => 5,*/
-            'IPA-FISIKA' => 5,
-           // 'IPA-KIMIA' => 5,
-            'IPS-SOSIOG' => 20,
-            'IPS-GEOGGI' => 15,
-            'IPS-EKONMI' => 5,
-            'IPS-SEJARH' => 5,
-            'IPS-ANTRGI' => 5,
+            'MATH' => 98,
+            'IND' => 116,
+            'ENG' => 0,
+            'IPA-FISIKA' => 86,
+            'IPA-KIMIA' => 73,
+            'IPA-BIOLOGI' => 98,
+            'IPS-SOSIOG' => 63,
+            'IPS-GEOGGI' => 110,
+            'IPS-EKONMI' => 14,
+            'IPS-SEJARH' => 20,
+            'IPS-ANTRGI' => 8,
         ];
 
         // Get reference data

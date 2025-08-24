@@ -5,10 +5,12 @@ use Illuminate\Validation\ValidationException;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Validate;
 use Livewire\Volt\Component;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 new #[Layout('layouts.auth', [
     'page_title' => 'Log in to your account'
 ])] class extends Component {
+
     #[Validate('required')]
     public string $username;
     #[Validate('required')]
@@ -16,6 +18,12 @@ new #[Layout('layouts.auth', [
     #[Validate('nullable|boolean')]
     public ?bool $remember = false;
 
+    public function mount(): void
+    {
+        if (session()->has('success-register')) {
+            \Jantinnerezo\LivewireAlert\Facades\LivewireAlert::title(session('success'))->success();
+        }
+    }
 
     /**
      * Handle an incoming authentication request.
@@ -80,18 +88,18 @@ new #[Layout('layouts.auth', [
                 <div class="card-body">
 
                     <div class="text-center mb-3">
-                        <a href=""><img src="{{ asset('logo/'.env('APP_LOGO_DARK')) }}" alt="img" /></a>
+                        <a href=""><img src="{{ asset('logo/'.config('app.logo_dark')) }}" alt="img" /></a>
                     </div>
 
                     @if(session('info'))
                         <div class="alert alert-info my-3" role="alert">
-                            <h5 class="alert-heading">Gagal!</h5>
+                            <h5 class="alert-heading">Info!</h5>
                             <p class="mb-0">{{ session('info') }}</p>
                         </div>
-                    @elseif(session('error'))
-                        <div class="alert alert-danger my-3" role="alert">
-                            <h5 class="alert-heading">Gagal!</h5>
-                            <p class="mb-0">{{ session('error') }}</p>
+                    @elseif(session('success-register'))
+                        <div class="alert alert-info my-3" role="alert">
+                            <h5 class="alert-heading">Berhasil Daftar!</h5>
+                            <p class="mb-0">{{ session('success-register') }}</p>
                         </div>
                     @endif
 

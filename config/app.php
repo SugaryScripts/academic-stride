@@ -123,4 +123,7 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
+    'logo_dark' => env('APP_LOGO_DARK', 'Logo.svg'),
+    'logo_light' => env('APP_LOGO_LIGHT', 'Logo.svg'),
+
 ];

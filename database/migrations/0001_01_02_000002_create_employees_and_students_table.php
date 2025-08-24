@@ -16,7 +16,9 @@ return new class extends Migration {
 
         Schema::create('students', function (Blueprint $table) {
             $table->id();
-            $table->string('ref_education_code');
+            $table->string('nisn', 10);
+            $table->string('phone', 15);
+            $table->string('ref_education_code')->default("");
             $table->foreignId('ref_education_id')
                 ->constrained('ref_educations')
                 ->cascadeOnUpdate()->restrictOnDelete();

@@ -4,14 +4,12 @@
         <div class="m-header">
             @if(auth()->user()->hasAnyRole('Educator','Analyser','Admin'))
                 <a href="{{ route('homes') }}" class="b-brand text-primary">
-                    <!-- ========   Change your logo from here   ============ -->
-                    <img src="{{ asset('assets/images/logo-dark.svg') }}" class="img-fluid logo-lg" style="max-width: 50%" alt="logo"/>
+                    <img src="{{ asset('logo/'.config('app.logo_dark')) }}" class="img-fluid logo-lg" alt="logo"/>
                     <span class="badge bg-light-success rounded-pill ms-2 theme-version">v0.0.1</span>
                 </a>
             @elseif(auth()->user()->hasAnyRole('Student','Admin'))
                 <a href="{{ route('my-exam') }}" class="b-brand text-primary">
-                    <!-- ========   Change your logo from here   ============ -->
-                    <img src="{{ asset('assets/images/logo-dark.svg') }}" class="img-fluid logo-lg" style="max-width: 50%" alt="logo"/>
+                    <img src="{{ asset('logo/'.config('app.logo_dark')) }}" class="img-fluid logo-lg" alt="logo"/>
                     <span class="badge bg-light-success rounded-pill ms-2 theme-version">v0.0.1</span>
                 </a>
             @endif

@@ -27,5 +27,7 @@
 
 <link rel="stylesheet" href="{{ asset('assets/css/style-preset.css') }}" />
 
+<link rel="stylesheet" href="{{ asset('vendor/sweetalert2-11.22.3/sweetalert2.min.css') }}">
+
 {{--@livewireStyles--}}
 @stack('styles')

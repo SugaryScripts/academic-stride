@@ -5,6 +5,7 @@
     'disabled' => false,
     'required' => null,
     'inline' => false,
+    'style_select' => 'form-select-sm'
 ])
 @php
     $idName = $name ?? $attributes->whereStartsWith('wire:model')->first();
@@ -22,7 +23,7 @@
         {{ $attributes->whereStartsWith('wire:') }}
         {{ $disabled ? 'disabled' : "wire:loading.class=border-warning" }}
         {{ $attributes }}
-        class="form-control form-select-sm @error( $attributes->whereStartsWith('wire:model')->first() ) is-invalid @enderror">
+        class="form-control {{ $style_select }} @error( $attributes->whereStartsWith('wire:model')->first() ) is-invalid @enderror">
     <option value="">{{ $placeholder }}</option>
     {{ $slot }}
 </select>

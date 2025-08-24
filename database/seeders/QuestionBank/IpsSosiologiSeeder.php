@@ -26,19 +26,19 @@ class IpsSosiologiSeeder extends Seeder
 
         $questions = [
             [
-                "Jika $4^m = 25$, maka $2^{m+3} + 4^m$ =",
+                "Salah satu masalah sosial dalam masyarakat adalah kemiskinan. Tingginya angka kemiskinan dapat meningkatkan tindak kriminal dalam masyarakat. Untuk mengatasi permasalahan tersebut, fungsi sosiologi adalah memberikan sumbangan dalam bentuk...",
                 "1"
             ],
             [
-                "Nilai dari $\sqrt{4 + \sqrt{7}} - \sqrt{4 - \sqrt{7}}$ =",
+                "Seorang walikota ingin melakukan perbaikan pada sistem tata kota di wilayahnya. Hal tersebut dilakukan agar tata kota terlihat lebih indah dan nyaman. Untuk itu, sosiolog membantunya memberikan data yang akurat tentang kebutuhan masyarakat pada keindahan kota. Manfaat sosiologi dalam kasus tersebut adalah untuk...",
                 "1"
             ],
             [
-                'Jika A + A³ = 5, maka nilai B adalah ...',
+                "Aspek utama yang dipelajari oleh sosiologi adalah interaksi antara...",
                 "1"
             ],
             [
-                'Proyeksi titik $(3,4)$ pada garis $y=x$ adalah ...',
+                "Bentuk keluarga berdasarkan perkawinan tunggal yang terdiri dari suami, istri, dan anak disebut dengan keluarga...",
                 "2"
             ],
             [
@@ -90,28 +90,28 @@ A. Ilmu pengetahuan dan teknologi",
 
         $answers = [
             [
-                '35',
-                '75',
-                '65',
-                '55',
+                "Perencanaan",
+                "Jasa konsultan",
+                "Ketersediaan data",
+                "Tenaga kerja terampil"
             ],
             [
-                '$\sqrt{2}$',
-                '$\sqrt{4}$',
-                '$\sqrt{3}$',
-                '1',
+                "Penelitian",
+                "Pencegahan",
+                "Pengawasan",
+                "Penyelesaian"
             ],
             [
-                '$\frac{4}{3}$',
-                '$\frac{1}{2}$',
-                '2',
-                '$\frac{4}{5}$',
+                "Manusia dengan lingkungan",
+                "Rakyat dengan penguasa",
+                "Manusia dengan manusia atau kelompok",
+                "Kelas-kelas sosial di masyarakat"
             ],
             [
-                '$\left(\frac{4}{3},\frac{4}{3}\right)$',
-                '$\left(\frac{9}{4},\frac{9}{4}\right)$',
-                '$\left(\frac{7}{3},\frac{7}{3}\right)$',
-                '$\left(\frac{7}{2},\frac{7}{2}\right)$',
+                "Inti",
+                "Besar",
+                "Sedang",
+                "Kecil"
             ],
             [
                 "Agama",

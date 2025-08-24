@@ -20,7 +20,8 @@ return new class extends Migration {
             $table->foreignId('ref_education_id')->constrained('ref_educations')
                 ->cascadeOnUpdate()->restrictOnDelete();
 
-            $table->foreignId('created_by')->constrained('users') // educator who created
+            $table->foreignId('created_by')->nullable()
+                ->constrained('users') // educator who created
                 ->cascadeOnUpdate()->nullOnDelete();
             $table->boolean('is_active')->default(true);
             $table->timestamps();
@@ -52,7 +53,8 @@ return new class extends Migration {
                 ->cascadeOnUpdate()->restrictOnDelete();
 
             $table->boolean('is_active')->default(true);
-            $table->foreignId('created_by')->constrained('users')
+            $table->foreignId('created_by')->nullable()
+                ->constrained('users')
                 ->cascadeOnUpdate()->nullOnDelete();
             $table->timestamps();
         });

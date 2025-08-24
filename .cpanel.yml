@@ -1,0 +1,10 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=~/public_html/garudacerdas.id
+    - /home/u2290978/bin/composer.phar install
+    - /usr/local/bin/php /home/u2290978/public_html/garudacerdas.id/artisan view:clear
+    - /usr/local/bin/php artisan optimize
+#    - /bin/rm -rf $DEPLOYPATH
+#    - /bin/mkdir -p $DEPLOYPATH
+#    - /bin/cp -a . $DEPLOYPATH

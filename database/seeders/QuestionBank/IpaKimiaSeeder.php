@@ -30,81 +30,78 @@ class IpaKimiaSeeder extends Seeder
 
         $questions = [
             [
-                [
-                    "Unsur dengan nomor atom 17 terletak pada…",
-                    "1"
-                ],
-                [
-                    "Sifat berikut yang tidak termasuk sifat keperiodikan unsur adalah…",
-                    "1"
-                ],
-                [
-                    "Unsur dengan konfigurasi elektron 1s² 2s² 2p⁶ 3s² 3p³ terletak pada…",
-                    "1"
-                ],
-                [
-                    "Berikut ini yang merupakan contoh senyawa ionik adalah...",
-                    "2"
-                ],
-                [
-                    "Senyawa berikut yang memiliki ikatan hidrogen adalah...",
-                    "2"
-                ],
-                [
-                    "Dalam reaksi 2H2(g) + O2(g) → 2H2O(g), jika 4 mol gas hidrogen bereaksi, maka volume gas oksigen yang dibutuhkan pada keadaan standar (STP) adalah... (1 mol gas pada STP = 22,4 liter)",
-                    "2"
-                ],
-                [
-                    "Reaksi antara gas hidrogen (H₂) dan gas iodin (I₂) membentuk gas hidrogen iodida (HI) adalah sebagai berikut: H₂(g) + I₂(g) ⇌ 2HI(g) Jika pada suhu tetap, konsentrasi H₂ dan I₂ masing-masing dinaikkan dua kali lipat, maka laju reaksi akan menjadi:",
-                    "3"
-                ],
-                [
-                    "Faktor-faktor berikut ini yang mempengaruhi laju reaksi, kecuali:",
-                    "3"
-                ],
-                [
-                    "Kesetimbangan kimia adalah:",
-                    "3"
-                ],
-                [
-                    "Reaksi kesetimbangan berikut: 2SO₂(g) + O₂(g) ⇌ 2SO₃(g) Jika pada suhu tetap, ditambahkan gas SO₃ ke dalam sistem, maka kesetimbangan akan bergeser ke arah...",
-                    "4"
-                ],
-                [
-                    "Jika suatu reaksi kesetimbangan mengalami kenaikan suhu, maka kesetimbangan akan bergeser ke arah...",
-                    "4"
-                ],
-                [
-                    "Kesetimbangan kimia tercapai pada suatu reaksi ketika...",
-                    "4"
-                ],
-                [
-                    "Reaksi pembakaran gas metana (CH4) melepaskan energi sebesar 890 kJ/mol. Jika 3,2 gram gas metana dibakar, berapa perubahan entalpi (ΔH) reaksi tersebut? (Ar C=12, H=1)",
-                    "5"
-                ],
-                [
-                    "Sel Volta tersusun dari elektroda Zn dalam larutan ZnSO4 dan elektroda Cu dalam larutan CuSO4. Pernyataan yang benar tentang sel Volta tersebut adalah...",
-                    "5"
-                ],
-                [
-                    "Berikut ini adalah contoh aplikasi elektrokimia dalam kehidupan sehari-hari, kecuali...",
-                    "5"
-                ],
-                [
-                    "Senyawa karbon memiliki jumlah yang sangat banyak karena...",
-                    "6"
-                ],
-                [
-                    "Salah satu manfaat senyawa hidrokarbon dalam kehidupan sehari-hari adalah...",
-                    "6"
-                ],
-                [
-                    "Contoh senyawa hidrokarbon yang termasuk golongan alkana adalah...",
-                    "6"
-                ]
+                "Unsur dengan nomor atom 17 terletak pada…",
+                "1"
+            ],
+            [
+                "Sifat berikut yang tidak termasuk sifat keperiodikan unsur adalah…",
+                "1"
+            ],
+            [
+                "Unsur dengan konfigurasi elektron 1s² 2s² 2p⁶ 3s² 3p³ terletak pada…",
+                "1"
+            ],
+            [
+                "Berikut ini yang merupakan contoh senyawa ionik adalah...",
+                "2"
+            ],
+            [
+                "Senyawa berikut yang memiliki ikatan hidrogen adalah...",
+                "2"
+            ],
+            [
+                "Dalam reaksi 2H2(g) + O2(g) → 2H2O(g), jika 4 mol gas hidrogen bereaksi, maka volume gas oksigen yang dibutuhkan pada keadaan standar (STP) adalah... (1 mol gas pada STP = 22,4 liter)",
+                "2"
+            ],
+            [
+                "Reaksi antara gas hidrogen (H₂) dan gas iodin (I₂) membentuk gas hidrogen iodida (HI) adalah sebagai berikut: H₂(g) + I₂(g) ⇌ 2HI(g) Jika pada suhu tetap, konsentrasi H₂ dan I₂ masing-masing dinaikkan dua kali lipat, maka laju reaksi akan menjadi:",
+                "3"
+            ],
+            [
+                "Faktor-faktor berikut ini yang mempengaruhi laju reaksi, kecuali:",
+                "3"
+            ],
+            [
+                "Kesetimbangan kimia adalah:",
+                "3"
+            ],
+            [
+                "Reaksi kesetimbangan berikut: 2SO₂(g) + O₂(g) ⇌ 2SO₃(g) Jika pada suhu tetap, ditambahkan gas SO₃ ke dalam sistem, maka kesetimbangan akan bergeser ke arah...",
+                "4"
+            ],
+            [
+                "Jika suatu reaksi kesetimbangan mengalami kenaikan suhu, maka kesetimbangan akan bergeser ke arah...",
+                "4"
+            ],
+            [
+                "Kesetimbangan kimia tercapai pada suatu reaksi ketika...",
+                "4"
+            ],
+            [
+                "Reaksi pembakaran gas metana (CH4) melepaskan energi sebesar 890 kJ/mol. Jika 3,2 gram gas metana dibakar, berapa perubahan entalpi (ΔH) reaksi tersebut? (Ar C=12, H=1)",
+                "5"
+            ],
+            [
+                "Sel Volta tersusun dari elektroda Zn dalam larutan ZnSO4 dan elektroda Cu dalam larutan CuSO4. Pernyataan yang benar tentang sel Volta tersebut adalah...",
+                "5"
+            ],
+            [
+                "Berikut ini adalah contoh aplikasi elektrokimia dalam kehidupan sehari-hari, kecuali...",
+                "5"
+            ],
+            [
+                "Senyawa karbon memiliki jumlah yang sangat banyak karena...",
+                "6"
+            ],
+            [
+                "Salah satu manfaat senyawa hidrokarbon dalam kehidupan sehari-hari adalah...",
+                "6"
+            ],
+            [
+                "Contoh senyawa hidrokarbon yang termasuk golongan alkana adalah...",
+                "6"
             ]
-
-    ];
+        ];
 
         $answers = [
             [
@@ -233,6 +230,9 @@ class IpaKimiaSeeder extends Seeder
             [0, 0, 1, 0], // C
             [0, 1, 0, 0], // B
             [1, 0, 0, 0], // A
+            [0,0,1,0], // C
+            [0,1,0,0], // B
+            [1,0,0,0], // A
         ];
 
          $proficiencies = [
@@ -251,9 +251,9 @@ class IpaKimiaSeeder extends Seeder
             [
                 "5", "penerapan matriks untuk merepresentasi dan menyederhanakan data"
             ],
-            /*[
+            [
                 "6", "pemodelan situasi dalam bentuk matematis dengan menggunakan fungsi dan sifat-sifatnya"
-            ],*/
+            ],
         ];
          // proficiencies
         $this->command->info("Creating $SUBJ proficiencies...");

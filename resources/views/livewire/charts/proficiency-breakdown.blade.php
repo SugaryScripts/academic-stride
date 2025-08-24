@@ -14,14 +14,14 @@ mount(function ($proficiencyData, $examTitle = null) {
 <div class="row">
     @foreach($proficiencyData as $proficiency)
     <div class="col-md-6 col-lg-4 mb-4">
-        <div class="card h-100 border-{{ $proficiency['score'] == 100 ? 'primary' : ($proficiency['score'] >= 80 ? 'success' : ($proficiency['score'] >= 60 ? 'warning' : 'danger')) }}">
-            <div class="card-header bg-{{ $proficiency['score'] == 100 ? 'primary' : ($proficiency['score'] >= 80 ? 'success' : ($proficiency['score'] >= 60 ? 'warning' : 'danger')) }} text-white">
+        <div class="card h-100 border-{{ $proficiency['score'] == 100 ? 'success' : ($proficiency['score'] >= 80 ? 'info' : ($proficiency['score'] >= 60 ? 'warning' : 'danger')) }}">
+            <div class="card-header bg-{{ $proficiency['score'] == 100 ? 'success' : ($proficiency['score'] >= 80 ? 'info' : ($proficiency['score'] >= 60 ? 'warning' : 'danger')) }} text-white">
                 <div class="d-flex justify-content-between align-items-start">
                     <div>
-                        <h6 class="mb-0">Proficiency {{ $proficiency['no'] }}</h6>
+                        <h6 class="mb-0 text-white">Proficiency {{ $proficiency['no'] }}</h6>
                         <small class="opacity-75">{{ $examTitle ?? 'Unknown Exam' }}</small>
                     </div>
-                    <span class="badge bg-white text-{{ $proficiency['score'] == 100 ? 'primary' : ($proficiency['score'] >= 80 ? 'success' : ($proficiency['score'] >= 60 ? 'warning' : 'danger')) }}">
+                    <span class="badge bg-white text-{{ $proficiency['score'] == 100 ? 'success' : ($proficiency['score'] >= 80 ? 'info' : ($proficiency['score'] >= 60 ? 'warning' : 'danger')) }}">
                         {{ $proficiency['score'] }}%
                     </span>
                 </div>
@@ -29,7 +29,7 @@ mount(function ($proficiencyData, $examTitle = null) {
             <div class="card-body">
                 <div class="mb-3">
                     <div class="progress" style="height: 8px;">
-                        <div class="progress-bar bg-{{ $proficiency['score'] == 100 ? 'primary' : ($proficiency['score'] >= 80 ? 'success' : ($proficiency['score'] >= 60 ? 'warning' : 'danger')) }}"
+                        <div class="progress-bar bg-{{ $proficiency['score'] == 100 ? 'success' : ($proficiency['score'] >= 80 ? 'info' : ($proficiency['score'] >= 60 ? 'warning' : 'danger')) }}"
                              style="width: {{ $proficiency['score'] }}%"></div>
                     </div>
                 </div>
@@ -44,9 +44,9 @@ mount(function ($proficiencyData, $examTitle = null) {
             <div class="card-footer bg-light">
                 <small class="text-muted">
                     @if($proficiency['score'] == 100)
-                        <i class="ti ti-crown text-primary"></i> Perfect mastery
+                        <i class="ti ti-crown text-success"></i> Perfect mastery
                     @elseif($proficiency['score'] >= 80)
-                        <i class="ti ti-check-circle text-success"></i> Good mastery
+                        <i class="ti ti-check-circle text-info"></i> Good mastery
                     @elseif($proficiency['score'] >= 60)
                         <i class="ti ti-alert-circle text-warning"></i> Needs improvement
                     @else

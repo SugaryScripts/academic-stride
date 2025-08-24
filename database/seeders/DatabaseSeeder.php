@@ -5,7 +5,10 @@ namespace Database\Seeders;
 use Database\Seeders\QuestionBank\BiSeeder;
 use Database\Seeders\QuestionBank\IpaFisikaSeeder;
 use Database\Seeders\QuestionBank\IpaKimiaSeeder;
+use Database\Seeders\QuestionBank\IpsAntropologiSeeder;
+use Database\Seeders\QuestionBank\IpsEkonomiSeeder;
 use Database\Seeders\QuestionBank\IpsGeografiSeeder;
+use Database\Seeders\QuestionBank\IpsSejarahSeeder;
 use Database\Seeders\QuestionBank\IpsSosiologiSeeder;
 use Database\Seeders\QuestionBank\MatematikaSeeder;
 use Illuminate\Database\Seeder;
@@ -33,15 +36,19 @@ class DatabaseSeeder extends Seeder
             BiSeeder::class,
             IpsSosiologiSeeder::class,
             IpsGeografiSeeder::class,
-            //MatematikaSeeder::class,
+            IpsEkonomiSeeder::class,
+            IpsSejarahSeeder::class,
+            IpsAntropologiSeeder::class,
+            MatematikaSeeder::class,
             IpaFisikaSeeder::class,
-            //IpaKimiaSeeder::class,
+            IpaKimiaSeeder::class,
 
 
             //ExamSeeder::class,
             //NotRealQuestionSeeder::class,
 
-            RealExamSeeder::class,
+            //RealExamSeeder::class,
+            RealExamV2Seeder::class,
         ]);
     }
 }

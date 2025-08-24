@@ -16,6 +16,8 @@ class StudentFactory extends Factory {
 
         return [
             'user_id' => User::factory(), // This creates a user automatically if not provided
+            'nisn' => $this->faker->unique()->numerify('##########'), // 10 digit NISN
+            'phone' => $this->faker->unique()->numerify('#############'), // 13 digit phone
             'ref_education_code' => $refEducation->code,
             'ref_education_id' => $refEducation->id,
         ];

@@ -197,10 +197,10 @@ class MatematikaSeeder extends Seeder
                 '-1',
             ],
             [
-                '$\begin{pmatrix} -2 & -3 \\ -3 & 2 \end{pmatrix}$',
-                '$\begin{pmatrix} -2 & 3 \\ 3 & -2 \end{pmatrix}$',
-                '$\begin{pmatrix} -4 & -3 \\ -3 & 4 \end{pmatrix}$',
-                '$\begin{pmatrix} 2 & -3 \\ 3 & -2 \end{pmatrix}$',
+                '$\begin{pmatrix} -2 & -3 \\\\ -3 & 2 \end{pmatrix}$',
+                '$\begin{pmatrix} -2 & 3 \\\\ 3 & -2 \end{pmatrix}$',
+                '$\begin{pmatrix} -4 & -3 \\\\ -3 & 4 \end{pmatrix}$',
+                '$\begin{pmatrix} 2 & -3 \\\\ 3 & -2 \end{pmatrix}$',
             ],
             [
                 '$\frac{2}{5}$ atau $3$',

@@ -18,7 +18,7 @@
     />
     <meta name="author" content="Ma Chung University" />
 
-    <title>{{ $page_title }}</title>
+    <title>{{ $page_title ?? 'GarudaCerdas - Academic Testing Platform' }}</title>
 
     <x-layouts.core.style />
 
@@ -29,7 +29,8 @@
 
 <body data-pc-preset="preset-5" data-pc-sidebar-caption="true"
       data-pc-layout="vertical" data-pc-direction="ltr"
-      data-pc-theme_contrast="true" data-pc-theme="dark">
+      data-pc-theme_contrast="true" data-pc-theme="dark"
+>
 
 <!-- [ Pre-loader ] start -->
 <div class="loader-bg">
@@ -37,18 +38,24 @@
         <div class="loader-fill"></div>
     </div>
 </div>
-<!-- [ Pre-loader ] End -->
+@auth
 <!-- [ Sidebar Menu ] start -->
 <x-layouts.micro.sidebar />
 <!-- [ Sidebar Menu ] end -->
 <!-- [ Header Topbar ] start -->
 <x-layouts.micro.header />
 <!-- [ Header ] end -->
+@endauth
+
+@guest
+<!-- Guest Header (if needed) -->
+<x-layouts.micro.guest-header />
+@endguest
 
 
 
 <!-- [ Main Content ] start -->
-<div class="pc-container">
+<div class="{{ auth()->check() ? 'pc-container' : 'w-100' }}">
     <!-- [ Main Content ] start -->
 {{ $slot }}
 <!-- [ Main Content ] end -->
@@ -65,3 +72,4 @@
 </body>
 <!-- [Body] end -->
 </html>
+

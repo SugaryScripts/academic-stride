@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
-
+use App\Livewire\Dashboard;
 
 Route::middleware('auth')->group(function () {
 
@@ -63,7 +63,16 @@ Route::middleware('auth')->group(function () {
 
     Route::get('session-exam', \App\Livewire\SessionExam::class)
         ->name('session.exam');
+
+    Route::get('payment', \App\Livewire\Payment::class)
+        ->name('payment');
 });
+
+
+
+
+Route::get('/dashboard', Dashboard::class)->name('dashboard');
+
 
 //Route::get('/', fn() => view('livewire.auth.login'))->name('login');
 

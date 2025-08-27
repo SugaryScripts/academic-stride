@@ -135,6 +135,9 @@ new #[Layout('layouts.auth', [
                             <x-form.input wire:model="password_confirmation" type="password"
                                           placeholder="Confirm Password"/>
                         </div>
+                        <div class="mb-3">
+                            <x-form.subscribe/>
+                        </div>
                         <div class="d-grid mt-4">
                             <button type="submit" class="btn btn-primary">Sign up</button>
                         </div>
@@ -143,7 +146,6 @@ new #[Layout('layouts.auth', [
                             <a href="{{ route('login') }}" class="link-primary">Login here</a>
                         </div>
                     </form>
-
                 </div>
             </div>
         </div>

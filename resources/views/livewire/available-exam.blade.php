@@ -1,7 +1,26 @@
 <x-slot name="page_title">
     Available Exams
 </x-slot>
+<style>
+    .btn-luxury {
+            background-image: linear-gradient(135deg, #a37c4f 0%, #d4af37 50%, #a37c4f 100%);
+            border: none;
+            color: white;
+            transition: all 0.3s ease-in-out;
+        }
 
+        /* Hover effect for the button */
+        .btn-luxury:hover {
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.6);
+            transform: scale(1.05) translateY(-2px);
+        }
+
+        /* Active (click) effect for the button */
+        .btn-luxury:active {
+            transform: scale(1.0) translateY(0);
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
+        }
+</style>
 <div class="row">
     <div class="col-xl-12">
         <div class="card">
@@ -52,6 +71,20 @@
                                     <td colspan="4" class="text-center">No available exams found.</td>
                                 </tr>
                             @endforelse
+                                <tr>
+                                    <td>Soal Premium</td>
+                                    <td>ini Soal Premium</td>
+                                    <td>
+                                        <a href="{{ route('payment') }}" class="btn btn-sm p-2 btn-luxury">Claim Exam</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Soal Premium</td>
+                                    <td>ini Soal Premium</td>
+                                    <td>
+                                        <a href="{{ route('payment') }}" class="btn btn-sm p-2 btn-luxury">Claim Exam</a>
+                                    </td>
+                                </tr>
                         </tbody>
                     </table>
                 </div>

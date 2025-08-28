@@ -59,7 +59,7 @@ class StudentExam extends Component {
         if ($this->examSession->isDirty()) {
             $this->examSession->save();
         }
-        
+
         // Calculate time remaining
         $now = Carbon::now();
         if ($this->examSession->estimated_finished_at->greaterThan($now)) {
@@ -155,7 +155,7 @@ class StudentExam extends Component {
             }
         }
 
-        return view('livewire.student-exam', [
+        return view('livewire.students.student-exam', [
             'currentSessionQuestion' => $currentSessionQuestion,
             'question' => $question, // Use the reordered question object
             'userAnswer' => $this->getUserAnswer($currentSessionQuestion),

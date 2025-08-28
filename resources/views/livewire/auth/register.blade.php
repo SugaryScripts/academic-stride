@@ -136,7 +136,7 @@ new #[Layout('layouts.auth', [
                                           placeholder="Confirm Password"/>
                         </div>
                         <div class="mb-3">
-                            <x-form.subscribe/>
+                            <x-form.pricing/>
                         </div>
                         <div class="d-grid mt-4">
                             <button type="submit" class="btn btn-primary">Sign up</button>

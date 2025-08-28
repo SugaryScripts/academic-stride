@@ -64,18 +64,18 @@ Route::middleware('auth')->group(function () {
     Route::get('session-exam', \App\Livewire\SessionExam::class)
         ->name('session.exam');
 
-    Route::get('payment', \App\Livewire\Payment::class)
-        ->name('payment');
+    Route::get('pricing', \App\Livewire\Pricing::class)
+        ->name('pricing');
 });
 
 
 
 
-Route::get('/dashboard', Dashboard::class)->name('dashboard');
+Route::get('/', Dashboard::class)->name('index');
 
 
 //Route::get('/', fn() => view('livewire.auth.login'))->name('login');
 
 require __DIR__.'/auth.php';
 
-//require __DIR__ . '/dummy-fe.php';
+// require __DIR__ . '/dummy-fe.php';

@@ -1,20 +1,25 @@
 <?php
 
-namespace App\Http\Controllers;
-use App\Models\Assessment\Exam;
-use Inertia\Inertia;
+namespace App\Http\Controllers\Student;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class ExamController extends Controller
 {
-    public function index()
-        {
-          $exams = Exam::all();
+    public function myExam()
+    {
+        // Get exams for the authenticated student
+        $user = auth()->user();
+        $student = $user->student;
 
-        // Kirim data 'exams' ke komponen frontend melalui Inertia
-        return Inertia::render('ActiveExam', [
+        // You can load exams data here
+        $exams = collect(); // Replace with actual exam data
+
+        return Inertia::render('students/myExam', [
             'exams' => $exams,
+            'user' => $user
         ]);
-        }
+    }
 }

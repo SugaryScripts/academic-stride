@@ -3,13 +3,22 @@
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
 use App\Models\Assessment\Exam;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Student\ExamController;
+
 Route::get('/', function () {
     return Inertia::render('home');
 });
 
-Route::get('/login', function () {
-    return Inertia::render('login');
+Route::get('/login', [LoginController::class, 'show'])->name('login');
+Route::post('/login', [LoginController::class, 'login']);
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+
+Route::middleware(['auth', 'role:student'])->group(function () {
+    Route::get('/students/my-exam', [ExamController::class, 'myExam'])->name('students.my-exam');
+    // Add other student routes here
 });
+
 
 
 Route::get('/active-exam', function () {

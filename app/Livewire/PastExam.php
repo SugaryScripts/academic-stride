@@ -29,7 +29,7 @@ class PastExam extends Component {
     }
 
     public function render() {
-        return view('livewire.past-exam', [
+        return view('livewire.students.past-exam', [
             'data' => $this->fetchData(),
         ]);
     }

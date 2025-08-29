@@ -4,10 +4,10 @@ namespace App\Livewire;
 
 use Livewire\Component;
 
-class Payment extends Component
+class Pricing extends Component
 {
     public function render()
     {
-        return view('livewire.transaction.payment');
+        return view('livewire.transaction.pricing');
     }
 }

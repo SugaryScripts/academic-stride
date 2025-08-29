@@ -27,9 +27,9 @@ class AvailableExams extends Component {
     public function render() {
         $data = $this->fetchData();
 
-        return view('livewire.available-exam', [
+        return view('livewire.students.available-exam', [
             'data' => $data,
-        ])->layout('layouts.app'); // Assuming micro layout for students
+        ]);
     }
 
     private function fetchData() {

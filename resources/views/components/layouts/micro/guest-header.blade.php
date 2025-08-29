@@ -5,8 +5,9 @@
         </a>
 
         <div class="ms-auto d-flex align-items-center">
-            <a href="#" class="nav-link text-decoration-none me-3 text-dark">Login</a>
-            <a href="#" class="btn btn-danger">Daftar</a>
+            <a href="{{ route('login') }}" class="nav-link text-decoration-none me-3 text-dark">Login</a>
+            <a href="{{ route('register') }}" class="btn btn-danger">Daftar</a>
+
         </div>
     </div>
 </header>

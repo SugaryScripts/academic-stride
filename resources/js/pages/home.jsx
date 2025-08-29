@@ -1,11 +1,11 @@
 import Navbar from "../layouts/Navbar";
 import Footer from "../layouts/Footer";
 
-
 const Home = () => {
   return (
     <div>
     <Navbar />
+
     <div className="w-full bg-white flex flex-col items-center">
         <main className="w-full flex flex-col gap-5 md:gap-8 lg:gap-10 items-center">
             <section className="w-full bg-gray-100">

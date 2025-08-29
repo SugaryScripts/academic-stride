@@ -33,7 +33,7 @@ class ActiveExam extends Component {
     }
 
     public function render() {
-        return view('livewire.active-exam', [
+        return view('livewire.students.active-exam', [
             'data' => $this->fetchData(),
         ]);
     }

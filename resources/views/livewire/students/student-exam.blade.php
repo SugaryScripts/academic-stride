@@ -1,5 +1,3 @@
-
-
 <div
     x-data="{
         questionUpdatedKey: @entangle('questionUpdatedKey').live,
@@ -54,12 +52,11 @@
                         <div class="card shadow">
                             <div class="card-body p-4 p-md-5">
                                 <!-- Question Text -->
-                                <div class="mb-4 mb-md-5">
-                                    <h4 class="fw-bold text-dark lh-base mb-4">
-                                        <span class="badge bg-light text-dark me-3 fs-6 math">{{ $currentQuestion }}</span>
-                                         {!! $question->question_text !!}
-                                    </h4>
+                                <div class="d-flex align-items-start gap-4 mb-4">
+                                    <div class="text-muted h4 font-weight-bold">{{ $currentQuestion }}.</div>
+                                    <div class="h4">{!! $question->question_text !!}</div>
                                 </div>
+
 
                                 <!-- Answer Options -->
                                 <div class="mb-0">

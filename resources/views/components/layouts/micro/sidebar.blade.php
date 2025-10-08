@@ -19,7 +19,7 @@
             <ul class="pc-navbar">
 
                 <li class="pc-item pc-caption">
-                    <label>Navigation</label>
+                    <label>{{ __('menu.navigation') }}</label>
                 </li>
 
                 @if(auth()->user()->hasAnyRole('Educator','Analyser','Admin'))
@@ -30,7 +30,7 @@
                                 <use xlink:href="#custom-status-up"></use>
                               </svg>
                             </span>
-                            <span class="pc-mtext">Home</span>
+                            <span class="pc-mtext">{{ __('menu.home') }}</span>
                         </a>
                     </li>
                 @elseif(auth()->user()->hasRole('Student'))
@@ -39,7 +39,7 @@
                         <span class="pc-micon">
                                                   <i class="fas fa-pencil-alt"></i>
                                                 </span>
-                            <span class="pc-mtext">Active Exams</span>
+                            <span class="pc-mtext">{{ __('menu.active_exams') }}</span>
                         </a>
                     </li>
                 @endif
@@ -79,7 +79,7 @@
                         <span class="pc-micon">
                           <i class="fas fa-file-export"></i>
                         </span>
-                        <span class="pc-mtext">Exam</span>
+                        <span class="pc-mtext">{{ __('menu.exam') }}</span>
                     </a>
                 </li>
 
@@ -90,7 +90,7 @@
                             <i class="fas fa-wallet"></i>
                         </span>
 
-                        <span class="pc-mtext">Subject</span>
+                        <span class="pc-mtext">{{ __('menu.subject') }}</span>
                     </a>
                 </li>
 
@@ -99,7 +99,7 @@
                         <span class="pc-micon">
                             <i class="ti ti-building-hospital"></i>
                         </span>
-                        <span class="pc-mtext">Question Bank</span>
+                        <span class="pc-mtext">{{ __('menu.question_bank') }}</span>
                     </a>
                 </li>
 
@@ -116,7 +116,7 @@
                             <use xlink:href="#custom-user"></use>
                             </svg>
                         </span>
-                        <span class="pc-mtext">Student</span>
+                        <span class="pc-mtext">{{ __('menu.student') }}</span>
                     </a>
                 </li>
                 <li class="pc-item {{ ( request()->routeIs('session.exam') ) ? 'pc-trigger active' : '' }}">
@@ -126,7 +126,7 @@
                         <use xlink:href="#custom-document"></use>
                       </svg>
                     </span>
-                        <span class="pc-mtext">Exam Session</span>
+                        <span class="pc-mtext">{{ __('menu.exam_session') }}</span>
                     </a>
                 </li>
 
@@ -137,7 +137,7 @@
                     <use xlink:href="#custom-document"></use>
                   </svg>
                 </span>
-                        <span class="pc-mtext">Grade</span>
+                        <span class="pc-mtext">{{ __('menu.grade') }}</span>
                     </a>
                 </li>
 
@@ -147,7 +147,7 @@
                         <span class="pc-micon">
                           <i class="fas fa-clipboard-check"></i>
                         </span>
-                            <span class="pc-mtext">Past Exams</span>
+                            <span class="pc-mtext">{{ __('menu.past_exams') }}</span>
                         </a>
                     </li>
                     <li class="pc-item {{ ( request()->routeIs('my-grades') ) ? 'pc-trigger active' : '' }}">
@@ -157,7 +157,7 @@
                             <use xlink:href="#custom-status-up"></use>
                           </svg>
                         </span>
-                            <span class="pc-mtext">My Grades</span>
+                            <span class="pc-mtext">{{ __('menu.my_grades') }}</span>
                         </a>
                     </li>
                     <li class="pc-item {{ ( request()->routeIs('available-exam') ) ? 'pc-trigger active' : '' }}">
@@ -165,7 +165,7 @@
                         <span class="pc-micon">
                           <i class="fas fa-book"></i>
                         </span>
-                            <span class="pc-mtext">Available Exams</span>
+                            <span class="pc-mtext">{{ __('menu.available_exams') }}</span>
                         </a>
                     </li>
                 @endif
@@ -174,10 +174,10 @@
                     <form action="{{ route('logout') }}" method="POST">
                         @csrf
                         <button type="submit" class="pc-link btn btn-link-secondary">
-                        <span class="pc-micon">
-                          <i class="fas fa-globe"></i>
-                        </span>
-                            <span class="pc-mtext">Log Out</span>
+                            <svg class="pc-icon me-2">
+                                <use xlink:href="#custom-logout-1-outline"></use>
+                            </svg>
+                            <span class="pc-mtext">{{ __('menu.log_out') }}</span>
                         </button>
                     </form>
                 </li>

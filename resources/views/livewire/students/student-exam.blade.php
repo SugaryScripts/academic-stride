@@ -30,7 +30,7 @@
                     <div class="card shadow-sm">
                         <div class="card-body">
                             <div class="d-flex justify-content-between align-items-center mb-3">
-                                <span class="text-muted fw-medium">Question {{ $currentQuestion }} of {{ $totalQuestions }}</span>
+                                <span class="text-muted fw-medium">{{ __('exam.question_of', ['current' => $currentQuestion, 'total' => $totalQuestions]) }}</span>
                                 <span class="badge bg-primary fs-6 px-3 py-2" id="timer">{{ $timeRemaining }}</span>
                             </div>
                             <div class="progress">
@@ -113,7 +113,7 @@
                                     <div>
                                         @if($currentQuestion > 1)
                                             <button wire:click="previousQuestion" class="btn btn-outline-secondary" wire:loading.attr="disabled" wire:navigate>
-                                                <i class="bi bi-arrow-left me-2"></i>Previous
+                                                <i class="bi bi-arrow-left me-2"></i>{{ __('exam.previous') }}
                                             </button>
                                         @endif
                                     </div>
@@ -156,7 +156,7 @@
                                     <div>
                                         @if($currentQuestion < $totalQuestions)
                                             <button wire:click="nextQuestion" class="btn btn-primary" wire:loading.attr="disabled" wire:navigate>
-                                                Next<i class="bi bi-arrow-right ms-2"></i>
+                                                {{ __('exam.next') }}<i class="bi bi-arrow-right ms-2"></i>
                                             </button>
                                         @else
                                             <button type="button"
@@ -164,7 +164,7 @@
                                                     data-bs-toggle="modal"
                                                     data-bs-target="#reviewQuestionsModal"
                                                     wire:loading.attr="disabled">
-                                                <i class="bi bi-list-check me-2"></i>Review Questions
+                                                <i class="bi bi-list-check me-2"></i>{{ __('exam.review_questions') }}
                                             </button>
                                         @endif
                                     </div>
@@ -177,8 +177,8 @@
                                 <div class="mb-4">
                                     <i class="bi bi-exclamation-triangle text-warning" style="font-size: 4rem;"></i>
                                 </div>
-                                <h5 class="fw-bold">No questions available</h5>
-                                <p class="text-muted">Please contact your instructor.</p>
+                                <h5 class="fw-bold">{{ __('exam.no_questions_available') }}</h5>
+                                <p class="text-muted">{{ __('exam.contact_instructor') }}</p>
                             </div>
                         </div>
                     @endif
@@ -190,7 +190,7 @@
                 <div class="col-12">
                     <div class="card shadow-sm">
                         <div class="card-body">
-                            <h6 class="mb-3 fw-bold">Question Overview</h6>
+                            <h6 class="mb-3 fw-bold">{{ __('exam.question_overview') }}</h6>
                             <div class="row g-2">
                                 @for($i = 1; $i <= $totalQuestions; $i++)
                                     @php
@@ -227,18 +227,18 @@
         <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header border-0">
-                    <h5 class="modal-title" id="reviewQuestionsModalLabel">Review Questions</h5>
+                    <h5 class="modal-title" id="reviewQuestionsModalLabel">{{ __('exam.review_questions') }}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body py-4">
                     <div class="mb-3">
                         <p class="text-muted mb-3">
-                            You have answered <strong class="text-success">{{ $answeredQuestions }}</strong> out of <strong>{{ $totalQuestions }}</strong> questions.
+                            {!! __('exam.answered_count', ['answered' => '<strong class="text-success">' . $answeredQuestions . '</strong>', 'total' => '<strong>' . $totalQuestions . '</strong>']) !!}
                         </p>
                         <div class="d-flex gap-3 mb-3">
-                            <small><span class="badge bg-success me-1"></span>Answered</small>
-                            <small><span class="badge bg-warning me-1"></span>Not Answered</small>
-                            <small><span class="badge bg-primary me-1"></span>Current</small>
+                            <small><span class="badge bg-success me-1"></span>{{ __('exam.answered') }}</small>
+                            <small><span class="badge bg-warning me-1"></span>{{ __('exam.not_answered') }}</small>
+                            <small><span class="badge bg-primary me-1"></span>{{ __('exam.current') }}</small>
                         </div>
                     </div>
                     <div class="row g-2">
@@ -267,14 +267,14 @@
                 </div>
                 <div class="modal-footer border-0 justify-content-center">
                     <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
-                        Continue Exam
+                        {{ __('exam.continue_exam') }}
                     </button>
                     <button type="button"
                             class="btn btn-success"
                             data-bs-dismiss="modal"
                             data-bs-toggle="modal"
                             data-bs-target="#submitExamModal">
-                        <i class="bi bi-check2 me-2"></i>Submit Exam
+                        <i class="bi bi-check2 me-2"></i>{{ __('exam.submit_exam') }}
                     </button>
                 </div>
             </div>
@@ -286,25 +286,25 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header border-0">
-                    <h5 class="modal-title" id="submitExamModalLabel">Submit Exam</h5>
+                    <h5 class="modal-title" id="submitExamModalLabel">{{ __('exam.submit_exam') }}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body text-center py-4">
                     <div class="mb-4">
                         <i class="bi bi-question-circle text-warning" style="font-size: 4rem;"></i>
                     </div>
-                    <h6 class="mb-3 fw-bold">Are you sure you want to submit your exam?</h6>
+                    <h6 class="mb-3 fw-bold">{{ __('exam.submit_confirmation') }}</h6>
                     <p class="text-muted mb-4">
-                        You have answered <strong class="text-primary">{{ $answeredQuestions }}</strong> out of <strong class="text-primary">{{ $totalQuestions }}</strong> questions.
-                        <br><small class="text-danger">Once submitted, you cannot make any changes.</small>
+                        {!! __('exam.answered_count', ['answered' => '<strong class="text-primary">' . $answeredQuestions . '</strong>', 'total' => '<strong class="text-primary">' . $totalQuestions . '</strong>']) !!}
+                        <br><small class="text-danger">{{ __('exam.submit_warning') }}</small>
                     </p>
                 </div>
                 <div class="modal-footer border-0 justify-content-center">
                     <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
-                        Continue Exam
+                        {{ __('exam.continue_exam') }}
                     </button>
                     <button wire:click="submitExam" class="btn btn-success" data-bs-dismiss="modal">
-                        <i class="bi bi-check2 me-2"></i>Submit Final Answer
+                        <i class="bi bi-check2 me-2"></i>{{ __('exam.submit_final_answer') }}
                     </button>
                 </div>
             </div>

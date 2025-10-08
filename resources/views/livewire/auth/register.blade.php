@@ -12,9 +12,9 @@ use Livewire\Attributes\Validate;
 use Livewire\Volt\Component;
 use App\Models\MasterType\RefEducation;
 
-new #[Layout('layouts.auth', [
-    'page_title' => 'Register new account'
-])] class extends Component {
+new
+#[Layout('layouts.auth')]
+class extends Component {
     // TODO: Real size NISN
     #[Validate('required|string|digits:10|unique:users,username')]
         public string $nisn;
@@ -39,7 +39,6 @@ new #[Layout('layouts.auth', [
 
     public function register() {
         $this->validate();
-        //\Barryvdh\Debugbar\Facades\Debugbar::info('Register clicked');
 
         try {
             $ref_user_type = RefMasterType::where('code', UserTypeConstant::STUDENT)->firstOrFail();
@@ -59,7 +58,6 @@ new #[Layout('layouts.auth', [
                 'ref_education_id' => $this->ref_education_id,
             ]);
 
-            //\Barryvdh\Debugbar\Facades\Debugbar::info('Register success');
             session()->flash('success', 'Akun berhasil didaftarkan!');
             $this->clearVars();
             return redirect()->route('login')->with('success-register', 'Akun berhasil didaftarkan!');
@@ -68,10 +66,8 @@ new #[Layout('layouts.auth', [
                 ->text($e->getMessage())
                 ->error()
                 ->show();
-            //\Barryvdh\Debugbar\Facades\Debugbar::info('Register failed');
             session()->flash('error', 'Pendaftaran akun gagal: ' . $e->getMessage());
         }
-        //\Barryvdh\Debugbar\Facades\Debugbar::info('Register anomaly detected');
     }
 
     private function clearVars() {
@@ -86,6 +82,9 @@ new #[Layout('layouts.auth', [
 }; ?>
 
 <div class="auth-main">
+    <x-slot name="title">
+        {{ __('title.register') }}
+    </x-slot>
     <div class="auth-wrapper v1">
         <div class="auth-form">
             <div class="card my-5">
@@ -98,27 +97,27 @@ new #[Layout('layouts.auth', [
 
                     @if(session('success'))
                         <div class="alert alert-info my-3" role="alert">
-                            <h5 class="alert-heading">Berhasil Daftar!</h5>
+                            <h5 class="alert-heading">{{ __('auth.register_success') }}</h5>
                             <p class="mb-0">{{ session('success') }}</p>
                         </div>
                     @elseif(session('error'))
                         <div class="alert alert-danger my-3" role="alert">
-                            <h5 class="alert-heading">Gagal!</h5>
+                            <h5 class="alert-heading">{{ __('auth.failed_title') }}</h5>
                             <p class="mb-0">{{ session('error') }}</p>
                         </div>
                     @endif
 
-                    <h4 class="text-center f-w-500 mb-3">Sign up new Account.</h4>
+                    <h4 class="text-center f-w-500 mb-3">{{ __('title.register') }}</h4>
 
                     <form wire:submit="register">
                         <div class="mb-3">
-                            <x-form.input wire:model="nisn" placeholder="NISN"/>
+                            <x-form.input wire:model="nisn" placeholder="{{ __('auth.nisn_placeholder') }}"/>
                         </div>
                         <div class="mb-3">
-                            <x-form.input wire:model="name" placeholder="Full Name"/>
+                            <x-form.input wire:model="name" placeholder="{{ __('auth.name_placeholder') }}"/>
                         </div>
                         <div class="mb-3">
-                            <x-form.select required placeholder="Choose Education Level" style_select="form-select"
+                            <x-form.select required placeholder="{{ __('auth.education_placeholder') }}" style_select="form-select"
                                            wire:model="ref_education_id">
                                 @foreach($education_levels as $education)
                                     <option value="{{ $education->id }}">{{ $education->name }}</option>
@@ -126,24 +125,25 @@ new #[Layout('layouts.auth', [
                             </x-form.select>
                         </div>
                         <div class="mb-3">
-                            <x-form.input wire:model="phone" placeholder="Phone Number"/>
+                            <x-form.input wire:model="phone" placeholder="{{ __('auth.phone_placeholder') }}"/>
                         </div>
                         <div class="mb-3">
-                            <x-form.input wire:model="password" type="password" placeholder="Password"/>
+                            <x-form.input wire:model="password" type="password" placeholder="{{ __('auth.password_placeholder') }}"/>
                         </div>
                         <div class="mb-3">
                             <x-form.input wire:model="password_confirmation" type="password"
-                                          placeholder="Confirm Password"/>
+                                          placeholder="{{ __('auth.confirm_password_placeholder') }}"/>
                         </div>
+                        {{-- TODO: phase 2
                         <div class="mb-3">
                             <x-form.pricing/>
-                        </div>
+                        </div>--}}
                         <div class="d-grid mt-4">
-                            <button type="submit" class="btn btn-primary">Sign up</button>
+                            <button type="submit" class="btn btn-primary">{{ __('auth.signup_button') }}</button>
                         </div>
                         <div class="d-flex justify-content-between align-items-end mt-4">
-                            <h6 class="f-w-500 mb-0">Already have an Account?</h6>
-                            <a href="{{ route('login') }}" class="link-primary">Login here</a>
+                            <h6 class="f-w-500 mb-0">{{ __('auth.have_account') }}</h6>
+                            <a href="{{ route('login') }}" class="link-primary">{{ __('auth.login_here') }}</a>
                         </div>
                     </form>
                 </div>

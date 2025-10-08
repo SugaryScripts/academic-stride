@@ -10,7 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta
         name="description"
-        content="Exam App built by Ma Chung University"
+        content="Exam App built by it's people for people"
     />
     <meta
         name="keywords"

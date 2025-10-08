@@ -3,15 +3,15 @@
 use Illuminate\Auth\Events\Lockout;
 use Illuminate\Validation\ValidationException;
 use Livewire\Attributes\Layout;
+use Livewire\Attributes\Title;
 use Livewire\Attributes\Validate;
 use Livewire\Volt\Component;
-use Jantinnerezo\LivewireAlert\LivewireAlert;
 
-new #[Layout('layouts.auth', [
-    'page_title' => 'Log in to your account'
-])] class extends Component {
+new
+#[Layout('layouts.auth')]
+class extends Component {
 
-    #[Validate('required')]
+    #[Validate('required', as: 'nisn pengguna')]
     public string $username;
     #[Validate('required')]
     public string $password;
@@ -80,8 +80,10 @@ new #[Layout('layouts.auth', [
 }
 
 ?>
-
 <div class="auth-main">
+    <x-slot name="title">
+        {{ __('title.login') }}
+    </x-slot>
     <div class="auth-wrapper v1">
         <div class="auth-form">
             <div class="card my-5">
@@ -93,37 +95,37 @@ new #[Layout('layouts.auth', [
 
                     @if(session('info'))
                         <div class="alert alert-info my-3" role="alert">
-                            <h5 class="alert-heading">Info!</h5>
+                            <h5 class="alert-heading">{{ __('auth.info') }}</h5>
                             <p class="mb-0">{{ session('info') }}</p>
                         </div>
                     @elseif(session('success-register'))
                         <div class="alert alert-info my-3" role="alert">
-                            <h5 class="alert-heading">Berhasil Daftar!</h5>
+                            <h5 class="alert-heading">{{ __('auth.register_success') }}</h5>
                             <p class="mb-0">{{ session('success-register') }}</p>
                         </div>
                     @endif
 
-                    <h4 class="text-center f-w-500 mb-3">Login with your email</h4>
+                    <h4 class="text-center f-w-500 mb-3">{{ __('auth.login_title') }}</h4>
 
                     <form wire:submit="login">
                         <div class="mb-3">
-                            <x-form.input wire:model="username" placeholder="Username" />
+                            <x-form.input wire:model="username" placeholder="{{ __('auth.username_placeholder') }}" />
                         </div>
                         <div class="mb-3">
-                            <x-form.input wire:model="password" type="password" placeholder="Password" />
+                            <x-form.input wire:model="password" type="password" placeholder="{{ __('auth.password_placeholder') }}" />
                         </div>
                         <div class="d-flex mt-1 justify-content-between align-items-center">
                             <div class="form-check">
                                 <input class="form-check-input input-primary" type="checkbox" id="remember" checked="" wire:model="remember" />
-                                <label class="form-check-label text-muted" for="remember">Remember me?</label>
+                                <label class="form-check-label text-muted" for="remember">{{ __('auth.remember_me') }}</label>
                             </div>
                         </div>
                         <div class="d-grid mt-4">
-                            <button type="submit" class="btn btn-primary">Login</button>
+                            <button type="submit" class="btn btn-primary">{{ __('auth.login_button') }}</button>
                         </div>
                         <div class="d-flex justify-content-between align-items-end mt-4">
-                            <h6 class="f-w-500 mb-0">Don't have an Account?</h6>
-                            <a href="{{ route('register') }}" class="link-primary">Create Account</a>
+                            <h6 class="f-w-500 mb-0">{{ __('auth.no_account') }}</h6>
+                            <a href="{{ route('register') }}" class="link-primary">{{ __('auth.create_account') }}</a>
                         </div>
                     </form>
                 </div>

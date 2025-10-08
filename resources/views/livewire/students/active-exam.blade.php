@@ -1,5 +1,5 @@
 <x-slot name="page_title">
-    Active Exams
+    {{ __('exam.active_exams') }}
 </x-slot>
 
 <div class="pc-content">
@@ -9,12 +9,12 @@
             <div class="row align-items-center">
                 <div class="col-md-12">
                     <ul class="breadcrumb">
-                        <li class="breadcrumb-item" aria-current="page">Active Exams</li>
+                        <li class="breadcrumb-item" aria-current="page">{{ __('exam.active_exams') }}</li>
                     </ul>
                 </div>
                 <div class="col-md-12">
                     <div class="page-header-title">
-                        <h2 class="mb-0">Active Exams</h2>
+                        <h2 class="mb-0">{{ __('exam.active_exams') }}</h2>
                     </div>
                 </div>
             </div>
@@ -30,7 +30,7 @@
 
                 {{-- Header --}}
                 <div class="card-header d-flex flex-column flex-md-row align-items-center justify-content-between">
-                    <h5 class="mb-0">Exam</h5>
+                    <h5 class="mb-0">{{ __('exam.active_exams') }}</h5>
                 </div>
                 {{-- End Header --}}
 
@@ -51,9 +51,9 @@
                             <div wire:loading class="mb-3">
                                 <div class="d-flex align-items-center text-primary">
                                     <div class="spinner-border spinner-border-sm me-2" role="status">
-                                        <span class="visually-hidden">Loading...</span>
+                                        <span class="visually-hidden">{{ __('exam.loading') }}</span>
                                     </div>
-                                    Loading...
+                                    {{ __('exam.loading') }}
                                 </div>
                             </div>
                         </div>
@@ -62,11 +62,11 @@
                         <table class="table table-hover" id="pc-dt-simple">
                             <thead>
                             <tr>
-                                <th>Exam</th>
-                                <th>Started At</th>
-                                <th>Finished At</th>
-                                <th>Status</th>
-                                <th>Action</th>
+                                <th>{{ __('exam.exam') }}</th>
+                                <th>{{ __('exam.started_at') }}</th>
+                                <th>{{ __('exam.finished_at') }}</th>
+                                <th>{{ __('exam.status') }}</th>
+                                <th>{{ __('exam.action') }}</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -80,12 +80,12 @@
                                         @if($item->status == 'OPEN')
                                             <button type="button" wire:click="onClickStart({{ $item->id }})"
                                                     class="btn btn-shadow btn-primary">
-                                                Start
+                                                {{ __('exam.start') }}
                                             </button>
                                         @elseif($item->status == 'IN_PROGRESS')
                                             <button type="button" wire:click="onClickStart({{ $item->id }})"
                                                     class="btn btn-shadow btn-primary">
-                                                Continue
+                                                {{ __('exam.continue') }}
                                             </button>
                                         @endif
                                     </td>

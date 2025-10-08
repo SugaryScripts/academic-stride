@@ -126,4 +126,8 @@ return [
     'logo_dark' => env('APP_LOGO_DARK', 'Logo.svg'),
     'logo_light' => env('APP_LOGO_LIGHT', 'Logo.svg'),
 
+    'available_locales' => [
+        'Indonesia' => 'id',
+        'English' => 'en'
+    ]
 ];

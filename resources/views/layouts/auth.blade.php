@@ -9,7 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta
         name="description"
-        content="Exam App built by Ma Chung University"
+        content="Exam App built by it's people for people"
     />
     <meta
         name="keywords"
@@ -17,7 +17,7 @@
     />
     <meta name="author" content="Ma Chung University" />
 
-    <title>{{ $page_title ?? config('app.name') }}</title>
+    <title>{{ $title ?? config('app.name') }}</title>
 
     <x-layouts.portal.style />
     <script>

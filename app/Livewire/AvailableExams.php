@@ -100,7 +100,7 @@ class AvailableExams extends Component {
 
         if ($existingSession) {
             LivewireAlert::info()
-                ->title('You already have an active session for this exam!')
+                ->title(__('exam.already_active_session'))
                 ->position('center')
                 ->toast(false)
                 ->withConfirmButton()
@@ -125,7 +125,7 @@ class AvailableExams extends Component {
             );
 
             LivewireAlert::success()
-                ->title('Exam claimed successfully!')
+                ->title(__('exam.exam_claimed_success'))
                 ->position('center')
                 ->withConfirmButton()
                 //->toast(false)
@@ -143,7 +143,7 @@ class AvailableExams extends Component {
 
         } catch (Exception $e) {
             LivewireAlert::error()
-                ->title('Failed to claim exam')
+                ->title(__('exam.failed_claim_exam'))
                 ->withConfirmButton()
                 ->text($e->getMessage())
                 ->toast(false)

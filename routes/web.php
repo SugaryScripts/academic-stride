@@ -6,8 +6,8 @@ use App\Livewire\Dashboard;
 
 Route::middleware('auth')->group(function () {
 
-    Route::get('/', \App\Livewire\Actions\Index::class)
-        ->name('index');
+    /*Route::get('/', \App\Livewire\Actions\Index::class)
+        ->name('index');*/
 
     Route::middleware('role:Educator|Admin')->group(function () {
 

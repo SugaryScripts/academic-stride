@@ -1,5 +1,5 @@
 <x-slot name="page_title">
-    Past Exams
+    {{ __('exam.past_exams') }}
 </x-slot>
 {{-- The best athlete wants his opponent at his best. --}}
 
@@ -11,12 +11,12 @@
                 <div class="col-md-12">
                     <ul class="breadcrumb">
                         {{--<li class="breadcrumb-item"><a href="javascript: void(0)">Employee</a></li>--}}
-                        <li class="breadcrumb-item" aria-current="page">Past Exams</li>
+                        <li class="breadcrumb-item" aria-current="page">{{ __('exam.past_exams') }}</li>
                     </ul>
                 </div>
                 <div class="col-md-12">
                     <div class="page-header-title">
-                        <h2 class="mb-0">Past Exams</h2>
+                        <h2 class="mb-0">{{ __('exam.past_exams') }}</h2>
                     </div>
                 </div>
             </div>
@@ -32,7 +32,7 @@
 
                 {{-- Header --}}
                 <div class="card-header d-flex flex-column flex-md-row align-items-center justify-content-between">
-                    <h5 class="mb-0">Exam List</h5>
+                    <h5 class="mb-0">{{ __('exam.exam_list') }}</h5>
                 </div>
                 {{-- End Header --}}
 
@@ -41,7 +41,7 @@
                         <div class="col-md-auto me-auto ">
                             <div class="row align-items-center">
                                 <div class="col-auto">
-                                    <label for="sort" class="col-form-label m-0">Display</label>
+                                    <label for="sort" class="col-form-label m-0">{{ __('exam.display') }}</label>
                                 </div>
                                 <div class="col-auto p-0">
                                     <select name="sort" id="sort"
@@ -53,7 +53,7 @@
                                     </select>
                                 </div>
                                 <div class="col-auto">
-                                    <label for="sort" class="col-form-label m-0">entries</label>
+                                    <label for="sort" class="col-form-label m-0">{{ __('exam.entries') }}</label>
                                 </div>
                             </div>
                         </div>
@@ -62,9 +62,9 @@
                             <div wire:loading class="mb-3">
                                 <div class="d-flex align-items-center text-primary">
                                     <div class="spinner-border spinner-border-sm me-2" role="status">
-                                        <span class="visually-hidden">Loading...</span>
+                                        <span class="visually-hidden">{{ __('exam.loading') }}</span>
                                     </div>
-                                    Loading...
+                                    {{ __('exam.loading') }}
                                 </div>
                             </div>
                         </div>
@@ -72,7 +72,7 @@
                             <div
                                 class="row align-items-center justify-content-lg-end justify-content-md-end justify-content-xl-end justify-content-xxl-end justify-content-sm-start">
                                 <div class="col-auto ps-0">
-                                    <x-form.input wire:model.defer="search" placeholder="search..."
+                                    <x-form.input wire:model.defer="search" placeholder="{{ __('exam.search_placeholder') }}"
                                                   wire:keydown.enter="$set('search', $event.target.value)"
                                                   class="form-control-sm" />
                                 </div>
@@ -83,10 +83,10 @@
                         <table class="table table-hover" id="pc-dt-simple">
                             <thead>
                             <tr>
-                                <th>Exam</th>
-                                <th>Started At</th>
-                                <th>Finished At</th>
-                                <th>Status</th>
+                                <th>{{ __('exam.exam') }}</th>
+                                <th>{{ __('exam.started_at') }}</th>
+                                <th>{{ __('exam.finished_at') }}</th>
+                                <th>{{ __('exam.status') }}</th>
                             </tr>
                             </thead>
                             <tbody>

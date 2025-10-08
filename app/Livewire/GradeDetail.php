@@ -95,11 +95,11 @@ class GradeDetail extends Component
     public function performanceGrade()
     {
         $avg = $this->averageScore();
-        if ($avg >= 90) return ['grade' => 'A', 'label' => 'Excellent', 'class' => 'info'];
-        if ($avg >= 80) return ['grade' => 'B', 'label' => 'Good', 'class' => 'success'];
-        if ($avg >= 70) return ['grade' => 'C', 'label' => 'Average', 'class' => 'warning'];
-        if ($avg >= 60) return ['grade' => 'D', 'label' => 'Below Average', 'class' => 'warning'];
-        return ['grade' => 'F', 'label' => 'Poor', 'class' => 'danger'];
+        if ($avg >= 90) return ['grade' => 'A', 'label' => __('exam.excellent'), 'class' => 'info'];
+        if ($avg >= 80) return ['grade' => 'B', 'label' => __('exam.good'), 'class' => 'success'];
+        if ($avg >= 70) return ['grade' => 'C', 'label' => __('exam.average'), 'class' => 'warning'];
+        if ($avg >= 60) return ['grade' => 'D', 'label' => __('exam.below_average'), 'class' => 'warning'];
+        return ['grade' => 'F', 'label' => __('exam.poor'), 'class' => 'danger'];
     }
 
     public function scrollToExam($sessionId)

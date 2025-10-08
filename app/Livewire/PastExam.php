@@ -25,7 +25,7 @@ class PastExam extends Component {
     public function sort($column) {
         $this->sortDirection = $this->sortColumn == $column ? ($this->sortDirection == 'asc' ? 'desc' : 'asc') : 'asc';
         $this->sortColumn = $column;
-        $this->alert('info', 'Data tersortir');
+        $this->alert('info', __('exam.data_sorted'));
     }
 
     public function render() {
